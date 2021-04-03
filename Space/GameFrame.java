@@ -82,6 +82,7 @@ public class GameFrame extends JFrame implements ActionListener {
 
     }
 
+    //David me cae mal
 
     private void declaration() {
         btnHelp = new JButton();
