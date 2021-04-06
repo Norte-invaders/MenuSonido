@@ -78,7 +78,6 @@ public class GameFrame extends JFrame implements ActionListener {
         settings.btnMuteBg.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(isOffBackground);
                 isOffBackground = !isOffBackground;
                 gameSounds.mute("background", isOffBackground);
             }
@@ -86,9 +85,7 @@ public class GameFrame extends JFrame implements ActionListener {
         settings.btnMuteEf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 isOffEffects = !isOffEffects;
-
                 gameSounds.mute("shots", isOffEffects);
                 gameSounds.mute("alien", isOffEffects);
                 gameSounds.mute("gameover", isOffEffects);

@@ -35,51 +35,27 @@ public class GameSounds {
         }
     }
 
-    public void setVolume(String alias, float db){
+    public void setVolume(String alias, int db){
         try {
             c = this.songs.get(alias);
             volCtrl = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
-            if((db >=40) && (db<50)){
-                db = -10f;
-            }else{
-                if((db >=30) && (db <40)){
-                    db= -20f;
-                }else{
-                    if((db>= 20) && (db <30)){
-                        db = -30f;
-                    }else{
-                        if((db>=10) && (db <20)){
-                            db = -40f;
-                        }else{
-                            if((db>=0) && (db <10)){
-                                db = -50f;
-                            }else{
-                                if((db>= 50) && (db<60)){
-                                    db = 1f;
-                                }else{
-                                    if((db>= 60) && (db<70)){
-                                        db = 2f;
-                                    }else{
-                                        if((db>=70) && (db<80)){
-                                            db = 3f;
-                                        }else{
-                                            if((db>= 80) && (db<90)){
-                                                db = 4f;
-                                            }else{
-                                                if((db>=90) && (db<=100)){
-                                                    db = 5f;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            switch (db) {
+                case 0 -> db = (int) -60f;
+                case 10 -> db = (int) -37f;
+                case 20 -> db = (int) -27f;
+                case 30 -> db = (int) -20f;
+                case 40 -> db = (int) -7f;
+                case 50 -> db = (int) 0f;
+                case 60 -> db = (int) 1f;
+                case 70 -> db = (int) 2f;
+                case 80 -> db = (int) 3f;
+                case 90 -> db = (int) 4f;
+                case 100 -> db = (int) 5f;
+            }
+            if ((db>-61) && (db<6)){
+                volCtrl.setValue(db);
             }
 
-            volCtrl.setValue(db);
         }catch(Exception exc){
             System.out.println(exc);
         }
