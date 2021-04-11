@@ -1,2 +1,4 @@
-package Space;public class OnlineGames {
+package Space;
+
+public class OnlineGames {
 }

@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.ImageIcon;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -15,7 +14,9 @@ public class GameFrame extends JFrame implements ActionListener {
     private GameSounds gameSounds;
     private Boolean isOffBackground;
     private Boolean isOffEffects;
-
+    Singleplayer pnlSinglePLayer;
+    HighScore frmHighScore;
+    ImageIcon icon;
     GameFrame(){
         declaration();
 
@@ -25,14 +26,18 @@ public class GameFrame extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setTitle("Space Invaders");
         this.setMinimumSize(new Dimension(600,600));
+        this.setIconImage(icon.getImage());
         this.add(scenes);
         scenes.setLayout(new CardLayout());
         scenes.add(menu);
         scenes.setOpaque(true);
         scenes.add(settings);
+        scenes.add(pnlSinglePLayer);
         menu.btnClose.addActionListener(this);
         menu.btnSettings.addActionListener(this);
         settings.btnBack.addActionListener(this);
+        menu.btnSingleplayerMode.addActionListener(this);
+        menu.btnMultiplayerMode.addActionListener(this);
 
         addSounds();
 
@@ -45,6 +50,9 @@ public class GameFrame extends JFrame implements ActionListener {
         gameSounds = new GameSounds("src/Space/Music/");
         menu = new Menu();
         settings = new Settings();
+        pnlSinglePLayer = new Singleplayer();
+        frmHighScore = new HighScore();
+        icon = new ImageIcon("src/Space/Assets/MainIcon.png");
     }
     private void addSounds(){
         gameSounds.add(GameSounds.BACKGROUND, "background_DuaLipa.wav");
@@ -117,6 +125,15 @@ public class GameFrame extends JFrame implements ActionListener {
         }
         if(e.getSource()==menu.btnClose){
             this.dispose();
+        }
+        if(e.getSource()==menu.btnSingleplayerMode){
+            scenes.removeAll();
+            scenes.add(pnlSinglePLayer);
+            scenes.validate();
+            scenes.repaint();
+        }
+        if(e.getSource()==menu.btnMultiplayerMode){
+            frmHighScore.setVisible(true);
         }
     }
 }

@@ -15,8 +15,8 @@ public class Menu extends JPanel implements ActionListener {
     private JPanel top;
     private JPanel bottom;
     private JPanel middle;
-    private JButton btnSingleplayerMode;
-    private JButton btnMultiplayerMode;
+    public JButton btnSingleplayerMode;
+    public JButton btnMultiplayerMode;
     private JLabel lblTitle;
     private JTextField inputNickname;
     Menu(){
