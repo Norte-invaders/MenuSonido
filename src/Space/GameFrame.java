@@ -17,6 +17,7 @@ public class GameFrame extends JFrame implements ActionListener {
     Singleplayer pnlSinglePLayer;
     HighScore frmHighScore;
     ImageIcon icon;
+    OnlineGames onlineG;
     GameFrame(){
         declaration();
 
@@ -53,6 +54,7 @@ public class GameFrame extends JFrame implements ActionListener {
         pnlSinglePLayer = new Singleplayer();
         frmHighScore = new HighScore();
         icon = new ImageIcon("src/Space/Assets/MainIcon.png");
+        onlineG = new OnlineGames();
     }
     private void addSounds(){
         gameSounds.add(GameSounds.BACKGROUND, "background_DuaLipa.wav");
@@ -134,6 +136,7 @@ public class GameFrame extends JFrame implements ActionListener {
         }
         if(e.getSource()==menu.btnMultiplayerMode){
             frmHighScore.setVisible(true);
+            onlineG.setVisible(true);
         }
     }
 }

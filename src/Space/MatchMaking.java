@@ -1,2 +1,11 @@
-package Space;public class MatchMaking {
+package Space;
+
+import javax.swing.*;
+
+public class MatchMaking extends JFrame {
+    MatchMaking(){
+
+
+    }
+
 }
