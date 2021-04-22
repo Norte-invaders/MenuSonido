@@ -23,11 +23,11 @@ public class Settings extends JPanel implements ActionListener {
     private JPanel settingsMiddleTop;
     private JPanel settingsMiddleBottom;
     private JPanel settingsLeft;
+    public int choice;
 
     Settings(){
         declaration();
-
-        this.setBackground(Color.BLACK);
+        this.setOpaque(false);
         this.setLayout(new BorderLayout());
         this.add(settingsTop, BorderLayout.NORTH);
         this.add(settingsMiddle, BorderLayout.CENTER);
@@ -88,7 +88,10 @@ public class Settings extends JPanel implements ActionListener {
         btnRight.setMaximumSize(new Dimension(70,60));
         btnMuteEf.setMaximumSize(new Dimension(50,50));
         btnMuteBg.setMaximumSize(new Dimension(50,50));
-        lblShip.setIcon(new ImageIcon("src/Space/Assets/shipdemo2.png"));
+        lblShip.setIcon(new ImageIcon("src/Space/Assets/ship1.png"));
+
+        btnLeft.addActionListener(this);
+        btnRight.addActionListener(this);
     }
     private void declaration() {
         sldBackground = new JSlider(0,100,50);
@@ -128,14 +131,26 @@ public class Settings extends JPanel implements ActionListener {
         btnBack.setIcon(new ImageIcon("src/Space/Assets/returnArrow.png"));
         btnLeft.setIcon(new ImageIcon("src/Space/Assets/leftArrow.png"));
         btnRight.setIcon(new ImageIcon("src/Space/Assets/rightArrow.png"));
-        btnMuteBg.setIcon(new ImageIcon("src/Space/Assets/mutebtn.jpeg"));
-        btnMuteEf.setIcon(new ImageIcon("src/Space/Assets/mutebtn.jpeg"));
+        btnMuteBg.setIcon(new ImageIcon("src/Space/Assets/mutebtn.png"));
+        btnMuteEf.setIcon(new ImageIcon("src/Space/Assets/mutebtn.png"));
 
         btnMuteBg.setBorderPainted(false);
         btnMuteEf.setBorderPainted(false);
         btnRight.setBorderPainted(false);
         btnLeft.setBorderPainted(false);
         btnBack.setBorderPainted(false);
+
+        btnBack.setOpaque(false);
+        btnBack.setContentAreaFilled(false);
+        btnRight.setOpaque(false);
+        btnRight.setContentAreaFilled(false);
+        btnLeft.setOpaque(false);
+        btnLeft.setContentAreaFilled(false);
+
+        btnMuteBg.setOpaque(false);
+        btnMuteBg.setContentAreaFilled(false);
+        btnMuteEf.setOpaque(false);
+        btnMuteEf.setContentAreaFilled(false);
     }
     private void sliderAppearence() {
         sldBackground.setMaximumSize(new Dimension(690,40));
@@ -159,9 +174,34 @@ public class Settings extends JPanel implements ActionListener {
         sldEffects.setForeground(Color.white);
         sldEffects.setSnapToTicks(true);
     }
+    public void setChoice() {
+        if(choice<0){
+            choice = choice*-1;
+        }
+            switch (choice % 10) {
+                case (0):
+                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship1.png"));
+                    break;
+                case (1):
+                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship2.png"));
+                    break;
+                case (2):
+                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship3.png"));
+                    break;
+            }
+    }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-
+        if(actionEvent.getSource()==btnLeft) {
+            choice = choice - 1;
+            setChoice();
+            System.out.println(choice);
+        }
+            if(actionEvent.getSource()==btnRight) {
+                choice = choice + 1;
+                setChoice();
+                System.out.println(choice);
+        }
     }
 }

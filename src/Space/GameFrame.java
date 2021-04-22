@@ -8,16 +8,18 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class GameFrame extends JFrame implements ActionListener {
-    JPanel scenes;
+    JLayeredPane scenes;
     Menu menu;
     Settings settings;
     private GameSounds gameSounds;
     private Boolean isOffBackground;
     private Boolean isOffEffects;
-    Singleplayer pnlSinglePLayer;
+    Singleplayer SinglePLayer;
     HighScore frmHighScore;
     ImageIcon icon;
-    OnlineGames onlineG;
+    //OnlineGames onlineG;
+    JPanel pnlBackground;
+    JLabel lblBackground;
     GameFrame(){
         declaration();
 
@@ -29,11 +31,13 @@ public class GameFrame extends JFrame implements ActionListener {
         this.setMinimumSize(new Dimension(600,600));
         this.setIconImage(icon.getImage());
         this.add(scenes);
-        scenes.setLayout(new CardLayout());
-        scenes.add(menu);
-        scenes.setOpaque(true);
-        scenes.add(settings);
-        scenes.add(pnlSinglePLayer);
+        scenes.setLayout(new OverlayLayout(scenes));
+        scenes.add(menu, JLayeredPane.PALETTE_LAYER);
+        scenes.add(pnlBackground, JLayeredPane.DEFAULT_LAYER);
+        pnlBackground.setLayout(new BorderLayout());
+        pnlBackground.add(lblBackground);
+        lblBackground.setIcon(new ImageIcon("src/Space/Assets/Background.jpg"));
+
         menu.btnClose.addActionListener(this);
         menu.btnSettings.addActionListener(this);
         settings.btnBack.addActionListener(this);
@@ -44,17 +48,20 @@ public class GameFrame extends JFrame implements ActionListener {
 
         playBackGround();
 
+
     }
 
     private void declaration() {
-        scenes = new JPanel();
+        scenes = new JLayeredPane();
         gameSounds = new GameSounds("src/Space/Music/");
         menu = new Menu();
         settings = new Settings();
-        pnlSinglePLayer = new Singleplayer();
+        SinglePLayer = new Singleplayer();
         frmHighScore = new HighScore();
         icon = new ImageIcon("src/Space/Assets/MainIcon.png");
-        onlineG = new OnlineGames();
+        //onlineG = new OnlineGames();
+        pnlBackground = new JPanel();
+        lblBackground = new JLabel();
     }
     private void addSounds(){
         gameSounds.add(GameSounds.BACKGROUND, "background_DuaLipa.wav");
@@ -110,8 +117,8 @@ public class GameFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==menu.btnSettings){
-            scenes.removeAll();
-            scenes.add(settings);
+            scenes.remove(menu);
+            scenes.add(settings, JLayeredPane.PALETTE_LAYER);
             scenes.validate();
             scenes.repaint();
             isOffEffects = false;
@@ -120,23 +127,24 @@ public class GameFrame extends JFrame implements ActionListener {
             slds();
         }
         if(e.getSource()==settings.btnBack){
-            scenes.removeAll();
-            scenes.add(menu);
+            scenes.remove(settings);
+            scenes.add(menu, JLayeredPane.PALETTE_LAYER);
             scenes.validate();
             scenes.repaint();
         }
         if(e.getSource()==menu.btnClose){
             this.dispose();
+            System.exit(0);
         }
         if(e.getSource()==menu.btnSingleplayerMode){
             scenes.removeAll();
-            scenes.add(pnlSinglePLayer);
+            scenes.add(SinglePLayer);
             scenes.validate();
             scenes.repaint();
         }
         if(e.getSource()==menu.btnMultiplayerMode){
             frmHighScore.setVisible(true);
-            onlineG.setVisible(true);
+            //onlineG.setVisible(true);
         }
     }
 }

@@ -22,11 +22,10 @@ public class Menu extends JPanel implements ActionListener {
     Menu(){
         declaration();
         this.setLayout(new BorderLayout());
-        this.setBackground(Color.BLACK);
-        this.setOpaque(true);
         this.add(top, BorderLayout.NORTH);
         this.add(bottom, BorderLayout.SOUTH);
         this.add(middle, BorderLayout.CENTER);
+        this.setOpaque(false);
 
         lblAppearence();
         btnApearence();
@@ -59,9 +58,9 @@ public class Menu extends JPanel implements ActionListener {
         btnSource.setIcon(new ImageIcon("src/Space/Assets/GIT.png"));
         btnHelp.setIcon(new ImageIcon("src/Space/Assets/help.png"));
         btnSettings.setIcon(new ImageIcon("src/Space/Assets/settings.png"));
-        btnClose.setIcon(new ImageIcon("src/Space/Assets/exiticon2.png"));
+        btnClose.setIcon(new ImageIcon("src/Space/Assets/exitIcon.png"));
         btnSingleplayerMode.setIcon(new ImageIcon("src/Space/Assets/SINGLE3.png"));
-        btnMultiplayerMode.setIcon(new ImageIcon("src/Space/Assets/multi3.png"));
+        btnMultiplayerMode.setIcon(new ImageIcon("src/Space/Assets/multi.png"));
 
         btnSource.setBorderPainted(false);
         btnHelp.setBorderPainted(false);
@@ -69,6 +68,21 @@ public class Menu extends JPanel implements ActionListener {
         btnClose.setBorderPainted(false);
         btnSingleplayerMode.setBorderPainted(false);
         btnMultiplayerMode.setBorderPainted(false);
+
+        btnClose.setOpaque(false);
+        btnClose.setContentAreaFilled(false);
+        btnSource.setOpaque(false);
+        btnSource.setContentAreaFilled(false);
+
+        btnHelp.setOpaque(false);
+        btnHelp.setContentAreaFilled(false);
+        btnSettings.setOpaque(false);
+        btnSettings.setContentAreaFilled(false);
+
+        btnMultiplayerMode.setOpaque(false);
+        btnMultiplayerMode.setContentAreaFilled(false);
+        btnSingleplayerMode.setOpaque(false);
+        btnSingleplayerMode.setContentAreaFilled(false);
     }
     private void topArrange() {
         top.setLayout(new BoxLayout(top, BoxLayout.LINE_AXIS));
@@ -103,7 +117,7 @@ public class Menu extends JPanel implements ActionListener {
         btnMultiplayerMode.setMaximumSize(new Dimension(200,51));
 
         inputNickname.setText("NICKNAME");
-        inputNickname.setBackground(Color.BLACK);
+        inputNickname.setOpaque(false);
         inputNickname.setForeground(Color.WHITE);
         inputNickname.setHorizontalAlignment(JTextField.CENTER);
         inputNickname.setPreferredSize(new Dimension(100,30));
