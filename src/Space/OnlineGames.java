@@ -49,11 +49,11 @@ public class OnlineGames extends JFrame implements MouseListener{
         tblOnlineparty.setBorder(new LineBorder(Color.white));
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        tblOnlineparty.getTableHeader().setFont(new Font("SEGOE UI",Font.BOLD,14));
         tblOnlineparty.getColumnModel().getColumn(0).setCellRenderer(renderer);
         tblOnlineparty.getColumnModel().getColumn(1).setCellRenderer(renderer);
-
+        tblOnlineparty.setDefaultEditor(Object.class,null);
         tblappearence.setOpaque(false);
-        //tblHighsc.setBorder(new BasicBorders.FieldBorder(Color.white,Color.white,Color.white,Color.white));
         tblOnlineparty.addMouseListener(this);
     }
 

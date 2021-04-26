@@ -19,7 +19,7 @@ public class Settings extends JPanel implements ActionListener {
     public JButton btnMuteEf;
     private JButton btnLeft;
     private JButton btnRight;
-    private JLabel lblShip;
+    public JLabel lblShip;
     private JPanel settingsMiddleTop;
     private JPanel settingsMiddleBottom;
     private JPanel settingsLeft;
@@ -111,6 +111,7 @@ public class Settings extends JPanel implements ActionListener {
         settingsMiddleTop = new JPanel();
         settingsMiddleBottom = new JPanel();
         settingsLeft = new JPanel();
+        choice = 0;
     }
     private void lblAppearence() {
 
@@ -175,10 +176,7 @@ public class Settings extends JPanel implements ActionListener {
         sldEffects.setSnapToTicks(true);
     }
     public void setChoice() {
-        if(choice<0){
-            choice = choice*-1;
-        }
-            switch (choice % 10) {
+            switch (choice) {
                 case (0):
                     lblShip.setIcon(new ImageIcon("src/Space/Assets/ship1.png"));
                     break;
@@ -188,20 +186,40 @@ public class Settings extends JPanel implements ActionListener {
                 case (2):
                     lblShip.setIcon(new ImageIcon("src/Space/Assets/ship3.png"));
                     break;
+                case (3):
+                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship4.png"));
+                    break;
+                case (4):
+                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship5.png"));
+                    break;
+                case (5):
+                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship6.png"));
+                    break;
+                case (6):
+                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship7.png"));
+                    break;
+                case (7):
+                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship8.png"));
+                    break;
+                case (8):
+                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship9.png"));
+                    break;
             }
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if(actionEvent.getSource()==btnLeft) {
+            if(choice>=1){
             choice = choice - 1;
             setChoice();
-            System.out.println(choice);
+            }
         }
             if(actionEvent.getSource()==btnRight) {
+                if(choice<8){
                 choice = choice + 1;
                 setChoice();
-                System.out.println(choice);
+                }
         }
     }
 }

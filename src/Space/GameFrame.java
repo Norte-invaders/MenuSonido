@@ -17,7 +17,7 @@ public class GameFrame extends JFrame implements ActionListener {
     Singleplayer SinglePLayer;
     HighScore frmHighScore;
     ImageIcon icon;
-    //OnlineGames onlineG;
+    OnlineGames onlineG;
     JPanel pnlBackground;
     JLabel lblBackground;
     GameFrame(){
@@ -59,7 +59,7 @@ public class GameFrame extends JFrame implements ActionListener {
         SinglePLayer = new Singleplayer();
         frmHighScore = new HighScore();
         icon = new ImageIcon("src/Space/Assets/MainIcon.png");
-        //onlineG = new OnlineGames();
+        onlineG = new OnlineGames();
         pnlBackground = new JPanel();
         lblBackground = new JLabel();
     }
@@ -137,14 +137,14 @@ public class GameFrame extends JFrame implements ActionListener {
             System.exit(0);
         }
         if(e.getSource()==menu.btnSingleplayerMode){
-            scenes.removeAll();
-            scenes.add(SinglePLayer);
+            scenes.remove(menu);
+            scenes.add(SinglePLayer, JLayeredPane.PALETTE_LAYER);
             scenes.validate();
             scenes.repaint();
         }
         if(e.getSource()==menu.btnMultiplayerMode){
             frmHighScore.setVisible(true);
-            //onlineG.setVisible(true);
+            onlineG.setVisible(true);
         }
     }
 }

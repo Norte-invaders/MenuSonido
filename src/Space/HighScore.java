@@ -3,7 +3,6 @@ package Space;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
@@ -30,6 +29,7 @@ public class HighScore extends JFrame {
         highscbg.add(tblappearence,BorderLayout.CENTER);
         tblappearence.add(tblHighsc.getTableHeader());
         tblappearence.add(tblHighsc);
+
     }
 
     private void appearence() {
@@ -48,11 +48,11 @@ public class HighScore extends JFrame {
         tblHighsc.setBorder(new LineBorder(Color.white));
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        tblHighsc.getTableHeader().setFont(new Font("SEGOE UI",Font.BOLD,14));
         tblHighsc.getColumnModel().getColumn(0).setCellRenderer(renderer);
         tblHighsc.getColumnModel().getColumn(1).setCellRenderer(renderer);
-
         tblappearence.setOpaque(false);
-        //tblHighsc.setBorder(new BasicBorders.FieldBorder(Color.white,Color.white,Color.white,Color.white));
+        tblHighsc.setDefaultEditor(Object.class,null);
     }
 
     private void declaration() {
@@ -63,4 +63,5 @@ public class HighScore extends JFrame {
         tblHighsc = new JTable(info,colummNames);
         tblappearence = new JPanel();
     }
+
 }

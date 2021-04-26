@@ -7,15 +7,15 @@ public class Player {
     private int x;
     private int y;
     private int speed;
-    Settings s = new Settings();
-    public Player(int x, int y, int speed){
+    private ImageIcon ship;
+    public Player(int x, int y, int speed,ImageIcon ship){
         this.x=x;
         this.y = y;
         this.speed=speed;
-
+        this.ship =ship;
     }
     public void paintPlayer(Graphics g){
         Graphics2D g2D= (Graphics2D) g;
-        g2D.drawImage(new ImageIcon("").getImage(),x,y,null);
+        g2D.drawImage(ship.getImage(),x,y,null);
     }
 }

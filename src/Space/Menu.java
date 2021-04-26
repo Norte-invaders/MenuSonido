@@ -83,6 +83,8 @@ public class Menu extends JPanel implements ActionListener {
         btnMultiplayerMode.setContentAreaFilled(false);
         btnSingleplayerMode.setOpaque(false);
         btnSingleplayerMode.setContentAreaFilled(false);
+
+        btnHelp.setToolTipText("Jesus is the answer");
     }
     private void topArrange() {
         top.setLayout(new BoxLayout(top, BoxLayout.LINE_AXIS));
