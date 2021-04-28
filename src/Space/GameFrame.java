@@ -20,6 +20,7 @@ public class GameFrame extends JFrame implements ActionListener {
     OnlineGames onlineG;
     JPanel pnlBackground;
     JLabel lblBackground;
+    private int bgchoice=0;
     GameFrame(){
         declaration();
 
@@ -36,13 +37,14 @@ public class GameFrame extends JFrame implements ActionListener {
         scenes.add(pnlBackground, JLayeredPane.DEFAULT_LAYER);
         pnlBackground.setLayout(new BorderLayout());
         pnlBackground.add(lblBackground);
-        lblBackground.setIcon(new ImageIcon("src/Space/Assets/Background.jpg"));
+        lblBackground.setIcon(new ImageIcon("src/Space/Assets/outerspace-6.gif"));
 
         menu.btnClose.addActionListener(this);
         menu.btnSettings.addActionListener(this);
         settings.btnBack.addActionListener(this);
         menu.btnSingleplayerMode.addActionListener(this);
         menu.btnMultiplayerMode.addActionListener(this);
+        settings.btnBackground.addActionListener(this);
 
         addSounds();
 
@@ -145,6 +147,17 @@ public class GameFrame extends JFrame implements ActionListener {
         if(e.getSource()==menu.btnMultiplayerMode){
             frmHighScore.setVisible(true);
             onlineG.setVisible(true);
+        }
+        if(e.getSource()==settings.btnBackground){
+            bgchoice= bgchoice+1;
+            switch (bgchoice % 2){
+                case(0):
+                    lblBackground.setIcon(new ImageIcon("src/Space/Assets/outerspace-6.gif"));
+                    break;
+                case(1):
+                    lblBackground.setIcon(new ImageIcon("src/Space/Assets/Background.jpg"));
+                    break;
+            }
         }
     }
 }

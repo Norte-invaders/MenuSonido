@@ -1,6 +1,7 @@
 package Space;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +10,7 @@ public class Settings extends JPanel implements ActionListener {
     public JSlider sldBackground;
     public JSlider sldEffects;
     private JPanel settingsTop;
-    private JPanel settingsBottom;
+    private JPanel settingsBottomMid;
     private JPanel settingsMiddle;
     private JLabel lblBackground;
     private JLabel lblEffects;
@@ -22,7 +23,8 @@ public class Settings extends JPanel implements ActionListener {
     public JLabel lblShip;
     private JPanel settingsMiddleTop;
     private JPanel settingsMiddleBottom;
-    private JPanel settingsLeft;
+    private JPanel settingsBottom;
+    public JButton btnBackground;
     public int choice;
 
     Settings(){
@@ -32,18 +34,18 @@ public class Settings extends JPanel implements ActionListener {
         this.add(settingsTop, BorderLayout.NORTH);
         this.add(settingsMiddle, BorderLayout.CENTER);
         this.add(settingsBottom, BorderLayout.SOUTH);
-        this.add(settingsLeft, BorderLayout.WEST);
 
         settingsTop.setLayout(new BoxLayout(settingsTop, BoxLayout.LINE_AXIS));
         settingsMiddle.setLayout(new BoxLayout(settingsMiddle, BoxLayout.PAGE_AXIS));
-        settingsBottom.setLayout(new FlowLayout());
+        settingsBottom.setLayout(new BorderLayout());
+        settingsBottomMid.setLayout(new FlowLayout());
         settingsMiddleTop.setLayout(new BoxLayout(settingsMiddleTop, BoxLayout.LINE_AXIS));
         settingsMiddleBottom.setLayout(new BoxLayout(settingsMiddleBottom, BoxLayout.LINE_AXIS));
 
         settingsTop.setOpaque(false);
         settingsMiddle.setOpaque(false);
+        settingsBottomMid.setOpaque(false);
         settingsBottom.setOpaque(false);
-        settingsLeft.setOpaque(false);
         settingsMiddleTop.setOpaque(false);
         settingsMiddleBottom.setOpaque(false);
 
@@ -55,7 +57,9 @@ public class Settings extends JPanel implements ActionListener {
 
         sliderAppearence();
 
-        settingsLeft.setPreferredSize(new Dimension(42,100));
+        //settingsLeft.setPreferredSize(new Dimension(42,100));
+        settingsMiddle.setBorder(new EmptyBorder(0,35,0,0));
+        settingsBottom.setBorder(new EmptyBorder(0,60,0,0));
 
         settingsTop.add(lblSettings);
         settingsTop.add(Box.createHorizontalGlue());
@@ -77,9 +81,11 @@ public class Settings extends JPanel implements ActionListener {
         settingsMiddleBottom.add(sldEffects);
         settingsMiddleBottom.add(btnMuteEf);
 
-        settingsBottom.add(btnLeft);
-        settingsBottom.add(lblShip);
-        settingsBottom.add(btnRight);
+        settingsBottom.add(settingsBottomMid, BorderLayout.CENTER);
+        settingsBottom.add(btnBackground, BorderLayout.EAST);
+        settingsBottomMid.add(btnLeft);
+        settingsBottomMid.add(lblShip);
+        settingsBottomMid.add(btnRight);
 
         lblShip.setMaximumSize(new Dimension(70,60));
         btnLeft.setPreferredSize(new Dimension(70,60));
@@ -89,6 +95,8 @@ public class Settings extends JPanel implements ActionListener {
         btnMuteEf.setMaximumSize(new Dimension(50,50));
         btnMuteBg.setMaximumSize(new Dimension(50,50));
         lblShip.setIcon(new ImageIcon("src/Space/Assets/ship1.png"));
+        btnBackground.setPreferredSize(new Dimension(70,60));
+        btnBackground.setMaximumSize(new Dimension(70,60));
 
         btnLeft.addActionListener(this);
         btnRight.addActionListener(this);
@@ -98,7 +106,7 @@ public class Settings extends JPanel implements ActionListener {
         sldEffects = new JSlider(0,100,50);
         settingsTop = new JPanel();
         settingsMiddle = new JPanel();
-        settingsBottom = new JPanel();
+        settingsBottomMid = new JPanel();
         lblBackground = new JLabel();
         lblEffects = new JLabel();
         btnBack = new JButton();
@@ -110,8 +118,9 @@ public class Settings extends JPanel implements ActionListener {
         lblShip = new JLabel();
         settingsMiddleTop = new JPanel();
         settingsMiddleBottom = new JPanel();
-        settingsLeft = new JPanel();
+        settingsBottom = new JPanel();
         choice = 0;
+        btnBackground = new JButton();
     }
     private void lblAppearence() {
 

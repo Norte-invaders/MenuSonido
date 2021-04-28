@@ -4,16 +4,17 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
-public class OnlineGames extends JFrame implements MouseListener{
+public class OnlineGames extends JFrame {
     private JPanel onlinePartybg;
     private JPanel tblappearence;
     private JLabel lblonlineParty;
     public JTable tblOnlineparty;
     OnlineGames(){
+
         declaration();
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -31,6 +32,15 @@ public class OnlineGames extends JFrame implements MouseListener{
         onlinePartybg.add(tblappearence,BorderLayout.CENTER);
         tblappearence.add(tblOnlineparty.getTableHeader());
         tblappearence.add(tblOnlineparty);
+
+        final RowPopup pop = new RowPopup(tblOnlineparty);
+        tblOnlineparty.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if(SwingUtilities.isLeftMouseButton(e)){
+                    pop.show(e.getComponent(),e.getX(),e.getY());
+                }
+            }
+        });
     }
 
     private void appearence() {
@@ -54,41 +64,28 @@ public class OnlineGames extends JFrame implements MouseListener{
         tblOnlineparty.getColumnModel().getColumn(1).setCellRenderer(renderer);
         tblOnlineparty.setDefaultEditor(Object.class,null);
         tblappearence.setOpaque(false);
-        tblOnlineparty.addMouseListener(this);
     }
 
     private void declaration() {
-        String[] colummNames = {"Available Parties","Join"};
+        String[] colummNames = {"Available Parties","Members"};
         Object[][] info ={{"SPACEEEEE","0"},{"ss","1"},{"xXDalaGodXx","2"}};
         lblonlineParty = new JLabel();
         onlinePartybg = new JPanel();
         tblOnlineparty = new JTable(info,colummNames);
         tblappearence = new JPanel();
     }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        String a= (String) tblOnlineparty.getValueAt(tblOnlineparty.getSelectedRow(),0);
-        System.out.println(a);
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
+    class  RowPopup extends JPopupMenu{
+        public RowPopup(JTable table){
+            JMenuItem join = new JMenuItem("Join");
+            join.addActionListener(new ActionListener() {
+                @Override
+                public void  actionPerformed(ActionEvent arg0){
+                    JOptionPane.showMessageDialog(join,"Joining...");
+                }
+            });
+            add(join);
+        }
 
     }
 
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 }
