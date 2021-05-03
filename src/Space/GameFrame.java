@@ -23,13 +23,11 @@ public class GameFrame extends JFrame implements ActionListener {
     private int bgchoice=0;
     GameFrame(){
         declaration();
-
+        this.setUndecorated(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
         this.setLayout(new BorderLayout());
-        this.setVisible(true);
         this.setTitle("Space Invaders");
-        this.setMinimumSize(new Dimension(600,600));
         this.setIconImage(icon.getImage());
         this.add(scenes);
         scenes.setLayout(new OverlayLayout(scenes));
@@ -49,8 +47,6 @@ public class GameFrame extends JFrame implements ActionListener {
         addSounds();
 
         playBackGround();
-
-
     }
 
     private void declaration() {
@@ -121,38 +117,37 @@ public class GameFrame extends JFrame implements ActionListener {
         if(e.getSource()==menu.btnSettings){
             scenes.remove(menu);
             scenes.add(settings, JLayeredPane.PALETTE_LAYER);
-            scenes.validate();
-            scenes.repaint();
             isOffEffects = false;
             isOffBackground = false;
             btnMute();
             slds();
         }
         if(e.getSource()==settings.btnBack){
+
             scenes.remove(settings);
             scenes.add(menu, JLayeredPane.PALETTE_LAYER);
-            scenes.validate();
-            scenes.repaint();
-        }
-        if(e.getSource()==menu.btnClose){
-            this.dispose();
-            System.exit(0);
-        }
-        if(e.getSource()==menu.btnSingleplayerMode){
-            scenes.remove(menu);
-            scenes.add(SinglePLayer, JLayeredPane.PALETTE_LAYER);
-            scenes.validate();
-            scenes.repaint();
         }
         if(e.getSource()==menu.btnMultiplayerMode){
             frmHighScore.setVisible(true);
             onlineG.setVisible(true);
+        }
+
+        if(e.getSource()==menu.btnSingleplayerMode){
+            scenes.remove(menu);
+            scenes.add(SinglePLayer, JLayeredPane.DRAG_LAYER);
+        }
+        revalidate();
+        repaint();
+        if(e.getSource()==menu.btnClose){
+            this.dispose();
+            System.exit(0);
         }
         if(e.getSource()==settings.btnBackground){
             bgchoice= bgchoice+1;
             switch (bgchoice % 2){
                 case(0):
                     lblBackground.setIcon(new ImageIcon("src/Space/Assets/outerspace-6.gif"));
+
                     break;
                 case(1):
                     lblBackground.setIcon(new ImageIcon("src/Space/Assets/Background.jpg"));

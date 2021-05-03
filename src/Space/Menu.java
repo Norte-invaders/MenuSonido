@@ -85,6 +85,12 @@ public class Menu extends JPanel implements ActionListener {
         btnSingleplayerMode.setContentAreaFilled(false);
 
         btnHelp.setToolTipText("Jesus is the answer");
+        btnClose.setRolloverIcon(new ImageIcon("src/Space/Assets/exitIconS.png"));
+        btnSource.setRolloverIcon(new ImageIcon("src/Space/Assets/GITS.png"));
+        btnHelp.setRolloverIcon(new ImageIcon("src/Space/Assets/helpS.png"));
+        btnSettings.setRolloverIcon(new ImageIcon("src/Space/Assets/settingsS.png"));
+        btnSingleplayerMode.setRolloverIcon(new ImageIcon("src/Space/Assets/singleplayerS.png"));
+        btnMultiplayerMode.setRolloverIcon(new ImageIcon("src/Space/Assets/multiplayerS.png"));
     }
     private void topArrange() {
         top.setLayout(new BoxLayout(top, BoxLayout.LINE_AXIS));

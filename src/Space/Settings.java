@@ -26,6 +26,7 @@ public class Settings extends JPanel implements ActionListener {
     private JPanel settingsBottom;
     public JButton btnBackground;
     public int choice;
+    public  String shipImg;
 
     Settings(){
         declaration();
@@ -57,7 +58,6 @@ public class Settings extends JPanel implements ActionListener {
 
         sliderAppearence();
 
-        //settingsLeft.setPreferredSize(new Dimension(42,100));
         settingsMiddle.setBorder(new EmptyBorder(0,35,0,0));
         settingsBottom.setBorder(new EmptyBorder(0,60,0,0));
 
@@ -121,6 +121,7 @@ public class Settings extends JPanel implements ActionListener {
         settingsBottom = new JPanel();
         choice = 0;
         btnBackground = new JButton();
+        shipImg = new String();
     }
     private void lblAppearence() {
 
@@ -143,12 +144,15 @@ public class Settings extends JPanel implements ActionListener {
         btnRight.setIcon(new ImageIcon("src/Space/Assets/rightArrow.png"));
         btnMuteBg.setIcon(new ImageIcon("src/Space/Assets/mutebtn.png"));
         btnMuteEf.setIcon(new ImageIcon("src/Space/Assets/mutebtn.png"));
+        btnBackground.setIcon(new ImageIcon("src/Space/Assets/BackgroundIcon.png"));
 
         btnMuteBg.setBorderPainted(false);
         btnMuteEf.setBorderPainted(false);
         btnRight.setBorderPainted(false);
         btnLeft.setBorderPainted(false);
         btnBack.setBorderPainted(false);
+        btnBackground.setBorderPainted(false);
+
 
         btnBack.setOpaque(false);
         btnBack.setContentAreaFilled(false);
@@ -156,11 +160,18 @@ public class Settings extends JPanel implements ActionListener {
         btnRight.setContentAreaFilled(false);
         btnLeft.setOpaque(false);
         btnLeft.setContentAreaFilled(false);
+        btnBackground.setOpaque(false);
+        btnBackground.setContentAreaFilled(false);
+        btnBackground.setFocusable(false);
 
         btnMuteBg.setOpaque(false);
         btnMuteBg.setContentAreaFilled(false);
         btnMuteEf.setOpaque(false);
         btnMuteEf.setContentAreaFilled(false);
+        btnMuteEf.setFocusable(false);
+        btnMuteBg.setFocusable(false);
+
+        btnBack.setRolloverIcon(new ImageIcon("src/Space/Assets/returnArrowS.png"));
     }
     private void sliderAppearence() {
         sldBackground.setMaximumSize(new Dimension(690,40));
@@ -187,31 +198,40 @@ public class Settings extends JPanel implements ActionListener {
     public void setChoice() {
             switch (choice) {
                 case (0):
-                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship1.png"));
+                    shipImg = "src/Space/Assets/ship1.png";
+                    lblShip.setIcon(new ImageIcon(shipImg));
                     break;
                 case (1):
-                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship2.png"));
+                    shipImg = "src/Space/Assets/ship2.png";
+                    lblShip.setIcon(new ImageIcon(shipImg));
                     break;
                 case (2):
-                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship3.png"));
+                    shipImg = "src/Space/Assets/ship3.png";
+                    lblShip.setIcon(new ImageIcon(shipImg));
                     break;
                 case (3):
-                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship4.png"));
+                    shipImg = "src/Space/Assets/ship4.png";
+                    lblShip.setIcon(new ImageIcon(shipImg));
                     break;
                 case (4):
-                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship5.png"));
+                    shipImg = "src/Space/Assets/ship5.png";
+                    lblShip.setIcon(new ImageIcon(shipImg));
                     break;
                 case (5):
-                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship6.png"));
+                    shipImg = "src/Space/Assets/ship6.png";
+                    lblShip.setIcon(new ImageIcon(shipImg));
                     break;
                 case (6):
-                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship7.png"));
+                    shipImg = "src/Space/Assets/ship7.png";
+                    lblShip.setIcon(new ImageIcon(shipImg));
                     break;
                 case (7):
-                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship8.png"));
+                    shipImg = "src/Space/Assets/ship8.png";
+                    lblShip.setIcon(new ImageIcon(shipImg));
                     break;
                 case (8):
-                    lblShip.setIcon(new ImageIcon("src/Space/Assets/ship9.png"));
+                    shipImg = "src/Space/Assets/ship9.png";
+                    lblShip.setIcon(new ImageIcon(shipImg));
                     break;
             }
     }
