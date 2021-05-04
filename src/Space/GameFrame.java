@@ -25,7 +25,7 @@ public class GameFrame extends JFrame implements ActionListener {
         declaration();
         this.setUndecorated(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 600);
+        this.setSize(1280, 720);
         this.setLayout(new BorderLayout());
         this.setTitle("Space Invaders");
         this.setIconImage(icon.getImage());
@@ -96,6 +96,11 @@ public class GameFrame extends JFrame implements ActionListener {
                 System.out.println(isOffBackground);
                 isOffBackground = !isOffBackground;
                 gameSounds.mute("background", isOffBackground);
+                if (isOffBackground==false){
+                    settings.btnMuteBg.setIcon(new ImageIcon("src/Space/Assets/soundbtn.png"));
+                }else{
+                    settings.btnMuteBg.setIcon(new ImageIcon("src/Space/Assets/mutebtn.png"));
+                }
             }
         });
         settings.btnMuteEf.addActionListener(new ActionListener() {
@@ -107,7 +112,11 @@ public class GameFrame extends JFrame implements ActionListener {
                 gameSounds.mute("shots", isOffEffects);
                 gameSounds.mute("alien", isOffEffects);
                 gameSounds.mute("gameover", isOffEffects);
-
+                if (isOffEffects==false){
+                    settings.btnMuteEf.setIcon(new ImageIcon("src/Space/Assets/soundbtn.png"));
+                }else{
+                    settings.btnMuteEf.setIcon(new ImageIcon("src/Space/Assets/mutebtn.png"));
+                }
             }
         });
     }

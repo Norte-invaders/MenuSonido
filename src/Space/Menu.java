@@ -59,8 +59,8 @@ public class Menu extends JPanel implements ActionListener {
         btnHelp.setIcon(new ImageIcon("src/Space/Assets/help.png"));
         btnSettings.setIcon(new ImageIcon("src/Space/Assets/settings.png"));
         btnClose.setIcon(new ImageIcon("src/Space/Assets/exitIcon.png"));
-        btnSingleplayerMode.setIcon(new ImageIcon("src/Space/Assets/SINGLE3.png"));
-        btnMultiplayerMode.setIcon(new ImageIcon("src/Space/Assets/multi.png"));
+        btnSingleplayerMode.setIcon(new ImageIcon("src/Space/Assets/singleplayer.png"));
+        btnMultiplayerMode.setIcon(new ImageIcon("src/Space/Assets/multiplayer.png"));
 
         btnSource.setBorderPainted(false);
         btnHelp.setBorderPainted(false);

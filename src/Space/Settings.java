@@ -142,8 +142,8 @@ public class Settings extends JPanel implements ActionListener {
         btnBack.setIcon(new ImageIcon("src/Space/Assets/returnArrow.png"));
         btnLeft.setIcon(new ImageIcon("src/Space/Assets/leftArrow.png"));
         btnRight.setIcon(new ImageIcon("src/Space/Assets/rightArrow.png"));
-        btnMuteBg.setIcon(new ImageIcon("src/Space/Assets/mutebtn.png"));
-        btnMuteEf.setIcon(new ImageIcon("src/Space/Assets/mutebtn.png"));
+        btnMuteBg.setIcon(new ImageIcon("src/Space/Assets/soundbtn.png"));
+        btnMuteEf.setIcon(new ImageIcon("src/Space/Assets/soundbtn.png"));
         btnBackground.setIcon(new ImageIcon("src/Space/Assets/BackgroundIcon.png"));
 
         btnMuteBg.setBorderPainted(false);
@@ -172,6 +172,9 @@ public class Settings extends JPanel implements ActionListener {
         btnMuteBg.setFocusable(false);
 
         btnBack.setRolloverIcon(new ImageIcon("src/Space/Assets/returnArrowS.png"));
+        btnRight.setRolloverIcon(new ImageIcon("src/Space/Assets/rightArrowS.png"));
+        btnLeft.setRolloverIcon(new ImageIcon("src/Space/Assets/leftArrowS.png"));
+        btnBackground.setRolloverIcon(new ImageIcon("src/Space/Assets/BackgroundIconS.png"));
     }
     private void sliderAppearence() {
         sldBackground.setMaximumSize(new Dimension(690,40));
