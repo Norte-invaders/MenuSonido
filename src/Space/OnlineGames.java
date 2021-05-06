@@ -8,28 +8,22 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
-public class OnlineGames extends JFrame {
-    private JPanel onlinePartybg;
+public class OnlineGames extends JPanel {
     private JPanel tblappearence;
     private JLabel lblonlineParty;
     public JTable tblOnlineparty;
     OnlineGames(){
 
         declaration();
-
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setTitle("Online Parties");
-        this.setSize(400,300);
-        this.setResizable(true);
-        this.add(onlinePartybg);
-        onlinePartybg.setLayout(new BorderLayout());
+        this.setOpaque(false);
+        this.setLayout(new BorderLayout());
         tblappearence.setLayout(new BoxLayout(tblappearence, BoxLayout.PAGE_AXIS));
 
         appearence();
 
-        onlinePartybg.setBorder(new EmptyBorder(0,20,20,20));
-        onlinePartybg.add(lblonlineParty,BorderLayout.NORTH);
-        onlinePartybg.add(tblappearence,BorderLayout.CENTER);
+        this.setBorder(new EmptyBorder(0,20,20,20));
+        this.add(lblonlineParty,BorderLayout.NORTH);
+        this.add(tblappearence,BorderLayout.CENTER);
         tblappearence.add(tblOnlineparty.getTableHeader());
         tblappearence.add(tblOnlineparty);
 
@@ -44,7 +38,6 @@ public class OnlineGames extends JFrame {
     }
 
     private void appearence() {
-        onlinePartybg.setBackground(Color.BLACK);
 
         lblonlineParty.setText("<html><h1>Online Parties</h1></html>");
         lblonlineParty.setForeground(Color.white);
@@ -70,7 +63,6 @@ public class OnlineGames extends JFrame {
         String[] colummNames = {"Available Parties","Members"};
         Object[][] info ={{"SPACEEEEE","0"},{"ss","1"},{"xXDalaGodXx","2"}};
         lblonlineParty = new JLabel();
-        onlinePartybg = new JPanel();
         tblOnlineparty = new JTable(info,colummNames);
         tblappearence = new JPanel();
     }

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 
@@ -34,6 +36,15 @@ public class Menu extends JPanel implements ActionListener {
         middleArrange();
         bottomArrange();
         btnAction();
+        inputNickname.addMouseListener(new MouseAdapter(){
+            @Override
+            public  void mouseClicked(MouseEvent m){
+                if(inputNickname.getText().contentEquals("NICKNAME")){
+                inputNickname.setText("");}
+            }
+        });
+        inputNickname.setFont(new Font("SEGOE UI",Font.BOLD,12));
+        btnHelp.addActionListener(this);
     }
     private void declaration() {
         btnHelp = new JButton();
@@ -163,6 +174,11 @@ public class Menu extends JPanel implements ActionListener {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+        }
+        if (e.getSource()==btnHelp){
+            String message = new String();
+            message="Controls:\n"+"Arrow keys for moving\n"+"If you still have any doubt, please call 911, beacuse we're in paro";
+            JOptionPane.showMessageDialog(btnHelp,message,"Helping help",1);
         }
     }
 }

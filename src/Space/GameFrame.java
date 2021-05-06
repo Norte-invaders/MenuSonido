@@ -3,6 +3,7 @@ package Space;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -120,7 +121,6 @@ public class GameFrame extends JFrame implements ActionListener {
             }
         });
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==menu.btnSettings){
@@ -137,8 +137,8 @@ public class GameFrame extends JFrame implements ActionListener {
             scenes.add(menu, JLayeredPane.PALETTE_LAYER);
         }
         if(e.getSource()==menu.btnMultiplayerMode){
-            frmHighScore.setVisible(true);
-            onlineG.setVisible(true);
+            scenes.remove(menu);
+            scenes.add(onlineG, JLayeredPane.PALETTE_LAYER);
         }
 
         if(e.getSource()==menu.btnSingleplayerMode){
