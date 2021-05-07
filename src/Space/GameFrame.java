@@ -22,7 +22,9 @@ public class GameFrame extends JFrame implements ActionListener {
     JPanel pnlBackground;
     JLabel lblBackground;
     private int bgchoice=0;
+    public String imagen;
     GameFrame(){
+        imagen = new String();
         declaration();
         this.setUndecorated(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,7 +134,8 @@ public class GameFrame extends JFrame implements ActionListener {
             slds();
         }
         if(e.getSource()==settings.btnBack){
-
+            imagen = settings.imagen();
+            System.out.println("primeraRuta "+imagen);
             scenes.remove(settings);
             scenes.add(menu, JLayeredPane.PALETTE_LAYER);
         }
@@ -143,7 +146,8 @@ public class GameFrame extends JFrame implements ActionListener {
 
         if(e.getSource()==menu.btnSingleplayerMode){
             scenes.remove(menu);
-            scenes.add(SinglePLayer, JLayeredPane.DRAG_LAYER);
+            SinglePLayer.createPath(imagen);
+            scenes.add(SinglePLayer, JLayeredPane.PALETTE_LAYER);
         }
         revalidate();
         repaint();

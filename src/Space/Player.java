@@ -24,8 +24,10 @@ public class Player implements KeyListener {
     }
 
 
-    public Player(int x,int y, int speed){
-
+    public Player(int x,int y, int speed, String loquesea){
+        shipImg = new String();
+        shipImg = loquesea;
+        System.out.println("Segunda ruta "+shipImg);
         this.x = x;
         this.y = y;
         this.speed = speed;
@@ -34,8 +36,7 @@ public class Player implements KeyListener {
 
     }
     public void declaration(){
-        shipImg = new String();
-        ship = new ImageIcon(this.getClass().getResource(shipImg));
+        ship=new ImageIcon(shipImg);
         image = ship.getImage();
         shoot = false;
     }

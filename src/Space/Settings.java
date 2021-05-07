@@ -138,6 +138,9 @@ public class Settings extends JPanel implements ActionListener {
         lblEffects.setFont(new Font("SansSerif Bold",Font.ITALIC,12));
 
     }
+    public String imagen(){
+        return shipImg;
+    }
     private void btnApearence() {
         btnBack.setIcon(new ImageIcon("src/Space/Assets/returnArrow.png"));
         btnLeft.setIcon(new ImageIcon("src/Space/Assets/leftArrow.png"));
