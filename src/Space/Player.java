@@ -42,10 +42,10 @@ public class Player implements KeyListener {
     }
 
     public void move() {
-        if( x + dx >= 790){
+        if( x + dx >= 1230){
             dx = 0;
         }
-        if ( x + dx <= -40){
+        if ( x + dx <= -12){
             dx = 0;
         }
         System.out.println("x= " + x);
@@ -60,10 +60,8 @@ public class Player implements KeyListener {
     }
 
     public void draw(Graphics g){
-        g.setColor(Color.BLUE);
-        g.fillRect(x,y,30,30);
-        //Graphics2D g2d = (Graphics2D) g;
-        //g2d.drawImage(ship.getImage(), x, y, null);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(ship.getImage(), x, y, null);
 
         if (shoot){
             Shoot(g);
