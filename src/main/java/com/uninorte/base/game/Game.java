@@ -77,6 +77,8 @@ public class Game implements Runnable {
         display.getGameCanvas().addMouseWheelListener(mouseManager);
         display.getFrame().addMouseWheelListener(mouseManager);
 
+        sound = new Sound(true);
+
         addSound();
         playBackground();
 
@@ -121,7 +123,7 @@ public class Game implements Runnable {
     }
 
     private void addSound() {
-        sound.add("background","/sounds/background.wav");
+        sound.add(sound.BACKGROUND ,"/sounds/background.wav");
         sound.add("gameover", "/sounds/gameovermario.wav");
         sound.add("shoot", "/sounds/shoot_3.wav");
     }

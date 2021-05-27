@@ -187,6 +187,7 @@ public class Assets {
             case SLKSCR -> fontStr =  "/fonts/slkscr.ttf";
             case SPACE_MISSION -> fontStr = "/fonts/space-mission.otf";
             case SPORT_TYPO -> fontStr = "/fonts/sport-typo.ttf";
+            case DEBUG -> fontStr = "/fonts/debug.otf";
         }
 
         return fontStr;

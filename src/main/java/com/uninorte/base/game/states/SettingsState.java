@@ -19,9 +19,10 @@ public class SettingsState extends State {
         int x = (int) (handler.boardDimensions().width * 0.5f - 128 / 2);
         int y = (int) (handler.boardDimensions().height / 2 + 101);
 
-        UISlider uiSliderbg = new UISlider(this,  x - 150, y / 2 + 10, 30, 40, (value) -> handler.getGame().setVolume(0,value));
+        UISlider uiSliderbg = new UISlider(this,  x - 150, y / 2 + 10, 30, 40, (value) -> {handler.getGame().setVolume(0,value);
+            System.out.println(value); });
         try {
-            uiSliderbg.setValue(handler.getGame().sound.getVolume("background"));
+            uiSliderbg.setValue(50);
         } catch (Exception e) {
             e.printStackTrace();
         }
