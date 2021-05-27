@@ -1,6 +1,5 @@
 package com.uninorte.base.game;
 
-import com.uninorte.base.Filenames;
 import com.uninorte.base.api.RequestHandler;
 import com.uninorte.base.api.RoomRequest;
 import com.uninorte.base.api.UserRequest;
@@ -19,6 +18,8 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
+
+    public static final String FILENAME_SETTINGS = "SpaceInvaders";
 
     private String title;
     private Dimension windowSize;
@@ -41,7 +42,7 @@ public class Game implements Runnable {
     public State gameOverState;
     public State settingsState;
     public State winScreenState;
-    public State singleplayerState;
+    public State singlePlayerState;
     public State multiplayerState;
     public State roomsState;
     public State signUpState;
@@ -52,9 +53,7 @@ public class Game implements Runnable {
 
     private Settings settings;
 
-    private RequestHandler requestHandler;
-    private UserRequest userRequest;
-    private RoomRequest roomRequest;
+    private GameClient gameClient;
 
     public Game(String title, Dimension windowSize) {
         this.title = title;
@@ -63,7 +62,7 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
 
-        settings = new Settings("spaceinvaders");
+        settings = new Settings(FILENAME_SETTINGS);
     }
 
     private void init() {
@@ -91,7 +90,7 @@ public class Game implements Runnable {
         gameOverState = new GameOverState(handler);
         settingsState = new SettingsState(handler);
         winScreenState = new WinScreenState(handler);
-        singleplayerState = new SingleplayerState(handler);
+        singlePlayerState = new SingleplayerState(handler);
         multiplayerState = new MultiplayerState(handler);
         signUpState = new SignUpState(handler);
         roomsState = new RoomsState(handler);
@@ -103,13 +102,8 @@ public class Game implements Runnable {
     }
 
     private void setRequestHandlers() {
-        requestHandler = new RequestHandler("http://localhost:8080");
-        userRequest = new UserRequest(requestHandler);
-        roomRequest = new RoomRequest(requestHandler);
-
-        handler.setRequestHandler(requestHandler);
-        handler.setUserRequest(userRequest);
-        handler.setRoomRequest(roomRequest);
+        gameClient = new GameClient("http://localhost:8080");
+        handler.setGameClient(gameClient);
     }
 
     private void loadUserIfExists() {
@@ -119,7 +113,7 @@ public class Game implements Runnable {
             return;
 
         User user = User.createFromJson(userData);
-        userRequest.setCurrentUser(user);
+        gameClient.setCurrentUser(user);
     }
 
     private void addSound() {
