@@ -15,7 +15,11 @@ public class Filenames {
             "/backgrounds/background_12.jpg"
     };
 
-    public static String[] BACKGROUND_MUSIC = new String[] {
+    public static String[] MUSIC = new String[] {
             "/sounds/background.wav",
+            "/sounds/gameovermario.wav",
+            "/sounds/shoot_3.wav",
+            "/sounds/alienDead.wav",
+            "/sounds/explosion.wav"
     };
 }

@@ -64,7 +64,7 @@ public class Board {
                 20,
                 true,
                 Color.white,
-                Assets.getFont(Assets.FontsName.SLKSCR, 20));
+                Assets.getFont(Assets.FontsName.SLKSCR, 30));
 
         entityManager.render(g);
     }

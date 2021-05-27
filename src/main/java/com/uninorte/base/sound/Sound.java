@@ -9,9 +9,10 @@ import java.util.HashMap;
 
 public class Sound {
     public static final String BACKGROUND = "background";
-    public static final String SHOTS = "shots";
+    public static final String SHOOTS = "shots";
     public static final String ALIEN = "alien";
     public static final String GAMEOVER = "gameover";
+    public static final String PLAYER = "player";
 
     private final HashMap<String, Audio> sounds;
 
@@ -94,16 +95,22 @@ public class Sound {
         }
 
         void setVolume(float volume) {
-            if (volume < 0f || volume > 1f)
+            if (volume < 0f || volume > 100f)
                 throw new IllegalArgumentException("Volume not valid: " + volume);
 
             FloatControl gainControl = (FloatControl) this.clipSound.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(20f * (float) Math.log10(volume));
+            if(volume == 0.5){
+                volume = 50;
+            }
+            gainControl.setValue((volume * 40f / 100f) - 35f);
+            System.out.println(35f);
         }
 
         float getVolume() {
             FloatControl gainControl = (FloatControl) clipSound.getControl(FloatControl.Type.MASTER_GAIN);
-            return (float) Math.pow(10f, gainControl.getValue() / 20f);
+            float a = (( (gainControl.getValue() + 35 ) * 100 ) / 40 );
+            System.out.println( "volume eff " + a);
+            return (( (gainControl.getValue() + 35 ) * 100 ) / 40 );
         }
 
         void mute() {

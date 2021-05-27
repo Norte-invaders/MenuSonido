@@ -15,7 +15,7 @@ public class UISlider extends UIObject {
     private ArrayList<BufferedImage> assets;
     private MouseListener mouseListener;
 
-    private float percent;
+    public float percent;
 
     private Point pointerCoordinates;
     private final Point originalCoordinates;
@@ -47,12 +47,11 @@ public class UISlider extends UIObject {
     }
 
     public void setValue(float value) {
-        if (value > 100) {
+        if (value >= -35 && value < 0) {
+            value = 50;
+        } else if ( value > 100){
             value = 100;
-        } else if (value < 0) {
-            value = 0;
         }
-
         pointerCoordinates.x = (int) (value * 312 / 100) + originalPointerCoordinates.x;
         bounds.x = pointerCoordinates.x;
         percent = value;

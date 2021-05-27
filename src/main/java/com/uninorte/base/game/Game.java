@@ -1,8 +1,7 @@
 package com.uninorte.base.game;
 
-import com.uninorte.base.api.RequestHandler;
-import com.uninorte.base.api.RoomRequest;
-import com.uninorte.base.api.UserRequest;
+import com.uninorte.base.Filenames;
+import com.uninorte.base.api.GameClient;
 import com.uninorte.base.api.models.User;
 import com.uninorte.base.game.input.MouseManager;
 import com.uninorte.base.game.states.*;
@@ -24,6 +23,7 @@ public class Game implements Runnable {
     private String title;
     private Dimension windowSize;
     private int choice = 0;
+    public int lastVolume = 0;
     private boolean running = false;
     private Thread gameThread;
 
@@ -117,28 +117,35 @@ public class Game implements Runnable {
     }
 
     private void addSound() {
-        sound.add(sound.BACKGROUND ,"/sounds/background.wav");
-        sound.add("gameover", "/sounds/gameovermario.wav");
-        sound.add("shoot", "/sounds/shoot_3.wav");
+        sound.add(Sound.BACKGROUND, Filenames.MUSIC[0]);
+        sound.add(Sound.GAMEOVER, Filenames.MUSIC[1]);
+        sound.add(Sound.SHOOTS, Filenames.MUSIC[2]);
+        sound.add(Sound.ALIEN, Filenames.MUSIC[3]);
+        sound.add(Sound.PLAYER, Filenames.MUSIC[4]);
     }
 
     private void playBackground() {
         try {
-            sound.play("background");
+            sound.play(Sound.BACKGROUND);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void playEffects(int num) {
+    public void playEffects(int num) {
         try {
             switch (num) {
                 case 0:
-                    sound.playEff("gameover");
+                    sound.playEff(Sound.GAMEOVER);
                     break;
                 case 1:
-                    sound.playEff("shoot");
+                    sound.playEff(Sound.SHOOTS);
                     break;
+                case 2:
+                    sound.playEff(Sound.PLAYER);
+                    break;
+                case 3:
+                    sound.playEff(Sound.ALIEN);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,42 +163,48 @@ public class Game implements Runnable {
         try{
             switch (num){
                 case 0:
-                    sound.setVolume("background", volume);
+                    sound.setVolume(Sound.BACKGROUND, volume);
+                    lastVolume = (int) sound.getVolume(Sound.BACKGROUND);
                     break;
                 case 1:
-                    sound.setVolume("gameover", volume);
-                    sound.setVolume("shoot", volume);
+                    sound.setVolume(Sound.GAMEOVER, volume);
+                    //sound.setVolume(Sound.SHOOTS, volume);
+                    //sound.setVolume(Sound.ALIEN, volume);
+                    break;
+                case 2:
+                    sound.setVolume(Sound.SHOOTS, volume);
+                    break;
+                case 3:
+                    sound.setVolume(Sound.ALIEN, volume);
+                    break;
             }
         }catch(Exception e){ }
     }
 
     public void gameoverSoundChange(float volume){
         try {
-            sound.setVolume("background",volume);
+            sound.setVolume(Sound.BACKGROUND,volume);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-
-     public void setMuted(int num){
-        //System.out.println("clicked");
+    public void setMuted(int num){
         try {
             switch(num) {
                 case 0:
-                    sound.setMuted("background");
+                    sound.setMuted(Sound.BACKGROUND);
                     break;
                 case 1:
-                    sound.setMuted("shoot");
-                    sound.setMuted("gameover");
+                    sound.setMuted(Sound.SHOOTS);
+                    sound.setMuted(Sound.GAMEOVER);
                     break;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     private void update() {
         // Set mouse and key listeners
         keyManager.update();
@@ -291,10 +304,11 @@ public class Game implements Runnable {
     }
 
     public void gameOver() {
-        gameoverSoundChange(0);
         State.setCurrentState(gameOverState);
         try {
-            if(sound.isMuted("gameover"))
+            lastVolume = (int) sound.getVolume(Sound.BACKGROUND);
+            gameoverSoundChange(0);
+            if(sound.isMuted(Sound.GAMEOVER))
                 return;
 
             playEffects(0);

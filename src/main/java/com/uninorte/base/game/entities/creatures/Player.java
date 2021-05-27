@@ -19,7 +19,7 @@ public class Player extends Creature {
         creatureAssetsOptions = Assets.getPlayerAssets();
         creatureAsset = creatureAssetsOptions.get(0);
 
-        projectilesManager = new ProjectilesManager(400);
+        projectilesManager = new ProjectilesManager(600);
         explosionController = new Explosion(Assets.ExplosionColor.RED);
     }
 
@@ -37,6 +37,7 @@ public class Player extends Creature {
         projectilesManager.update();
 
         if (checkEntityCollisions(0, 0)) {
+            handler.getGame().playEffects(3);
             hurt(1);
         }
     }
@@ -72,6 +73,8 @@ public class Player extends Creature {
             xMove = -speed;
         if (handler.getKeyManager().getStatusKey(KeyEvent.VK_D))
             xMove = speed;
+        if (handler.getKeyManager().getStatusKey(KeyEvent.VK_SPACE))
+            handler.getGame().playEffects(1);
 
     }
 
@@ -100,8 +103,9 @@ public class Player extends Creature {
     }
 
     private void shoot() {
-        projectilesManager.addProjectile(() -> (handler.getKeyManager().getStatusKey(KeyEvent.VK_SPACE) || true) && explosionController.isAvailableRender(),
+        projectilesManager.addProjectile(() -> (handler.getKeyManager().getStatusKey(KeyEvent.VK_SPACE)) && explosionController.isAvailableRender(),
                 new Projectile(handler, x, y, Projectile.Direction.UP, this));
+
     }
 
     public boolean isRenderingExplosion() {
