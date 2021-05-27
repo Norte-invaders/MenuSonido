@@ -1,5 +1,6 @@
 package com.uninorte.base.game;
 
+import com.uninorte.base.Filenames;
 import com.uninorte.base.api.RequestHandler;
 import com.uninorte.base.api.RoomRequest;
 import com.uninorte.base.api.UserRequest;
@@ -11,6 +12,7 @@ import com.uninorte.base.game.gfx.Assets;
 import com.uninorte.base.game.gfx.ContentLoader;
 import com.uninorte.base.game.input.KeyManager;
 import com.uninorte.base.settings.Settings;
+import com.uninorte.base.sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +22,7 @@ public class Game implements Runnable {
 
     private String title;
     private Dimension windowSize;
-
+    private int choice = 0;
     private boolean running = false;
     private Thread gameThread;
 
@@ -45,6 +47,8 @@ public class Game implements Runnable {
     public State signUpState;
 
     private Image background;
+
+    public  Sound sound;
 
     private Settings settings;
 
@@ -113,6 +117,82 @@ public class Game implements Runnable {
         userRequest.setCurrentUser(user);
     }
 
+    private void addSound() {
+        sound.add("background", "/sounds/background-DuaLipa.wav");
+        sound.add("gameover", "/sounds/gameovermario.wav");
+        sound.add("shoot", "/sounds/shoot_3.wav");
+    }
+
+    private void playBackground() {
+        try {
+            sound.play("background");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void playEffects(int num) {
+        try {
+            switch (num) {
+                case 0:
+                    sound.playEff("gameover");
+                    break;
+                case 1:
+                    sound.playEff("shoot");
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setBackground(){
+        choice++;
+        changeBackground(Filenames.BACKGROUND_IMAGES[choice]);
+        if(choice == 11)
+            choice = 0;
+    }
+
+    public void setVolume(int num, float volume){
+        try{
+            switch (num){
+                case 0:
+                    sound.setVolume("background", volume);
+                    break;
+                case 1:
+                    sound.setVolume("gameover", volume);
+                    sound.setVolume("shoot", volume);
+            }
+        }catch(Exception e){ }
+    }
+
+    public void gameoverSoundChange(float volume){
+        try {
+            sound.setVolume("background",volume);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+     public void setMuted(int num){
+        //System.out.println("clicked");
+        try {
+            switch(num) {
+                case 0:
+                    sound.setMuted("background");
+                    break;
+                case 1:
+                    sound.setMuted("shoot");
+                    sound.setMuted("gameover");
+                    break;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void update() {
         // Set mouse and key listeners
         keyManager.update();
@@ -212,7 +292,16 @@ public class Game implements Runnable {
     }
 
     public void gameOver() {
+        gameoverSoundChange(0);
         State.setCurrentState(gameOverState);
+        try {
+            if(sound.isMuted("gameover"))
+                return;
+
+            playEffects(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void close() {

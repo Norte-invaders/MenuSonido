@@ -39,13 +39,15 @@ public class Assets {
     public enum FontsName {
         SLKSCR,
         SPACE_MISSION,
-        SPORT_TYPO
+        SPORT_TYPO,
+        DEBUG,
     }
 
     public enum UI_ELEMENTS {
         BUTTONS,
         SLIDER,
-        BUTTONS_NON_SQUARE
+        BUTTONS_NON_SQUARE,
+        BUTTONSMUTE,
     }
 
     private static ArrayList<BufferedImage> playerAssets;
@@ -75,6 +77,7 @@ public class Assets {
         uiComponents = new HashMap<>();
         uiComponents.put(getUiString(UI_ELEMENTS.BUTTONS), loadSprites(105, 21, 4, "/ui/labels.png"));
         uiComponents.put(getUiString(UI_ELEMENTS.BUTTONS_NON_SQUARE), loadSprites(134, 119, 2, "/ui/buttons-non-square.png"));
+        uiComponents.put(getUiString(UI_ELEMENTS.BUTTONSMUTE), loadSprites(50,50,2,"/ui/mutebtns.png"));
 
         SpriteSheet slidersSheet = new SpriteSheet(ContentLoader.loadImage("/ui/sheet-slider.png"));
         ArrayList<BufferedImage> sliders = new ArrayList<>();
