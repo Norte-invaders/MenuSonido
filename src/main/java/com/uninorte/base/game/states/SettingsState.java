@@ -1,6 +1,8 @@
 package com.uninorte.base.game.states;
 
 import com.uninorte.base.game.Handler;
+import com.uninorte.base.game.gfx.Assets;
+import com.uninorte.base.game.gfx.Text;
 import com.uninorte.base.game.ui.StaticElements;
 import com.uninorte.base.game.ui.UIButton;
 import com.uninorte.base.game.ui.UISlider;
@@ -51,6 +53,24 @@ public class SettingsState extends State {
 
     @Override
     public void render(Graphics g) {
+        Text.drawString(g, "SETTINGS",
+                handler.boardDimensions().width / 2 + 30,
+                handler.boardDimensions().height / 9,
+                true,
+                Color.WHITE,
+                Assets.getFont(Assets.FontsName.DEBUG, 100));
+        Text.drawString(g, "Background",
+                handler.boardDimensions().width / 2 + 30,
+                handler.boardDimensions().height / 4 + 35,
+                true,
+                Color.WHITE,
+                Assets.getFont(Assets.FontsName.DEBUG, 35));
+        Text.drawString(g, "Effects",
+                handler.boardDimensions().width / 2 + 30 ,
+                handler.boardDimensions().width / 4 + 90,
+                true,
+                Color.WHITE,
+                Assets.getFont(Assets.FontsName.DEBUG, 35));
         uiManager.render(g);
     }
 

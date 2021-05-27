@@ -81,8 +81,8 @@ public class Assets {
 
         SpriteSheet slidersSheet = new SpriteSheet(ContentLoader.loadImage("/ui/sheet-slider.png"));
         ArrayList<BufferedImage> sliders = new ArrayList<>();
-        sliders.add(slidersSheet.crop(0, 0, 245, 18));
-        sliders.add(slidersSheet.crop(245, 0, 22, 17));
+        sliders.add(slidersSheet.crop(0, 0, 440, 33));
+        sliders.add(slidersSheet.crop(440, 0, 39, 32));
         uiComponents.put(getUiString(UI_ELEMENTS.SLIDER), sliders);
 
         fonts = new HashMap<>();

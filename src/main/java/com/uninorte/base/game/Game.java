@@ -77,6 +77,9 @@ public class Game implements Runnable {
         display.getGameCanvas().addMouseWheelListener(mouseManager);
         display.getFrame().addMouseWheelListener(mouseManager);
 
+        addSound();
+        playBackground();
+
         Assets.init();
 
         handler = new Handler(this);
@@ -118,7 +121,7 @@ public class Game implements Runnable {
     }
 
     private void addSound() {
-        sound.add("background", "/sounds/background-DuaLipa.wav");
+        sound.add("background","/sounds/background.wav");
         sound.add("gameover", "/sounds/gameovermario.wav");
         sound.add("shoot", "/sounds/shoot_3.wav");
     }
@@ -149,7 +152,7 @@ public class Game implements Runnable {
     public void setBackground(){
         choice++;
         changeBackground(Filenames.BACKGROUND_IMAGES[choice]);
-        if(choice == 11)
+        if(choice == 10)
             choice = 0;
     }
 

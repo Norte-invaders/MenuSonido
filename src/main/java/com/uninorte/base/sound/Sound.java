@@ -37,6 +37,7 @@ public class Sound {
         a.clipSound.loop(Clip.LOOP_CONTINUOUSLY);
         a.clipSound.start();
     }
+
     public void playEff(String alias) throws Exception{
         Audio a = getAudio(alias);
         a.clipSound.setFramePosition(0);
