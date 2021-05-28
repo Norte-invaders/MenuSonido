@@ -1,9 +1,12 @@
 package com.uninorte.base.game.states.multiplayer;
 
 import com.uninorte.base.api.SocketActionsListener;
+import com.uninorte.base.api.models.RemotePlayer;
 import com.uninorte.base.api.models.Room;
 import com.uninorte.base.api.models.User;
 import com.uninorte.base.game.Handler;
+import com.uninorte.base.game.states.GameStateMultiplayer;
+import com.uninorte.base.game.states.State;
 
 import java.util.List;
 
@@ -38,8 +41,20 @@ public class MultiplayerController implements SocketActionsListener {
 
     @Override
     public void onStartMatch() {
-        //TODO: Start match here
-        System.out.println("match should start");
+        State.setCurrentState(handler.getGame().gameStateMultiplayer);
+    }
+
+    @Override
+    public void onRoomInitialized(RemotePlayer player1, RemotePlayer player2) {
+        player1.setHandler(handler);
+        player2.setHandler(handler);
+
+        ((GameStateMultiplayer) handler.getGame().gameStateMultiplayer).multiplayerBoard.setPlayers(player1, player2);
+    }
+
+    @Override
+    public void onPlayerUpdates(RemotePlayer player) {
+        ((GameStateMultiplayer) handler.getGame().gameStateMultiplayer).multiplayerBoard.updatePlayer(player);
     }
 
     public List<User> getUsers() {

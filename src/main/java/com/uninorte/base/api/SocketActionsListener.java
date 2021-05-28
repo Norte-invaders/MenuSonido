@@ -1,5 +1,6 @@
 package com.uninorte.base.api;
 
+import com.uninorte.base.api.models.RemotePlayer;
 import com.uninorte.base.api.models.Room;
 import com.uninorte.base.api.models.User;
 
@@ -10,4 +11,6 @@ public interface SocketActionsListener {
     void onNewUser(List<User> users, User newUser);
     void onCountDown(String counter);
     void onStartMatch();
+    void onRoomInitialized(RemotePlayer player1, RemotePlayer player2);
+    void onPlayerUpdates(RemotePlayer player);
 }

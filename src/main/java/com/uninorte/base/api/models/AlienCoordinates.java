@@ -108,8 +108,4 @@ public class AlienCoordinates extends Base {
                 '}';
     }
 
-    @Override
-    public void render(Graphics g, float x, float y, boolean center) {
-
-    }
 }

@@ -1,6 +1,7 @@
 package com.uninorte.base.api;
 
 import com.uninorte.base.api.models.Error;
+import com.uninorte.base.api.models.RemotePlayer;
 import com.uninorte.base.api.models.Room;
 import com.uninorte.base.api.models.User;
 
@@ -51,6 +52,14 @@ public class GameClient {
             return;
 
         socketClient.joinRoom(currentUser, currentRoom);
+    }
+
+    public void initializeUsers(RemotePlayer player1, RemotePlayer player2) {
+        socketClient.initializeMatch(player1.toJson(), player2.toJson());
+    }
+
+    public void updateUser(RemotePlayer player) {
+        socketClient.updateUser(player.toJson());
     }
 
     public void createUser(String nickname) {
