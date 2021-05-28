@@ -11,8 +11,14 @@ import com.uninorte.base.game.ui.UISlider;
 import com.uninorte.base.sound.Sound;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import static com.uninorte.base.game.gfx.Assets.UI_ELEMENTS.ARROW_BUTTON_L;
+import static com.uninorte.base.game.gfx.Assets.UI_ELEMENTS.ARROW_BUTTON_R;
 
 public class SettingsState extends State {
+
     private int index;
     protected ArrayList<BufferedImage> playerAssetsOptions;
     protected BufferedImage playerAssets;
