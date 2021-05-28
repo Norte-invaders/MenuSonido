@@ -46,6 +46,7 @@ class SocketClient {
         socket.on("user-joined", this::onUserJoinedCallback);
         socket.on("new-user", this::onNewUserCallback);
         socket.on("start-match", this::onStartMatchCallback);
+        socket.on("count-down", this::onCountDown);
     }
 
     private void onUserJoinedCallback(Object ...objects) {
@@ -62,6 +63,11 @@ class SocketClient {
 
         for (SocketActionsListener listener: listeners)
             listener.onNewUser(users, newUser);
+    }
+
+    private void onCountDown(Object ...objects) {
+        for (SocketActionsListener listener: listeners)
+            listener.onCountDown(objects[0].toString());
     }
 
     private void onStartMatchCallback(Object ...objects) {

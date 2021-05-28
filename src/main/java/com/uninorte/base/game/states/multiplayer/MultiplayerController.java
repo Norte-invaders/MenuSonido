@@ -4,7 +4,6 @@ import com.uninorte.base.api.SocketActionsListener;
 import com.uninorte.base.api.models.Room;
 import com.uninorte.base.api.models.User;
 import com.uninorte.base.game.Handler;
-import com.uninorte.base.game.states.State;
 
 import java.util.List;
 
@@ -12,6 +11,8 @@ public class MultiplayerController implements SocketActionsListener {
 
     private List<User> users;
     private Room room;
+
+    public String countDown;
 
     private Handler handler;
 
@@ -31,8 +32,14 @@ public class MultiplayerController implements SocketActionsListener {
     }
 
     @Override
+    public void onCountDown(String counter) {
+        countDown = counter;
+    }
+
+    @Override
     public void onStartMatch() {
         //TODO: Start match here
+        System.out.println("match should start");
     }
 
     public List<User> getUsers() {
