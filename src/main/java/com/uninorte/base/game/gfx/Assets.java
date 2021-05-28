@@ -7,6 +7,21 @@ import java.util.HashMap;
 
 public class Assets {
 
+    public enum BackGrounds {
+        bg0,
+        bg1,
+        bg2,
+        bg3,
+        bg4,
+        bg5,
+        bg6,
+        bg7,
+        bg8,
+        bg9,
+        bg10,
+        bg11
+    }
+
     public enum AlienColor {
         RED,
         YELLOW,
@@ -59,6 +74,8 @@ public class Assets {
     private static HashMap<String, ArrayList<BufferedImage>> explosions;
     private static HashMap<String, ArrayList<BufferedImage>> uiComponents;
     private static HashMap<String, Font> fonts;
+    private static HashMap<String, ArrayList<BufferedImage>> background;
+    private static HashMap<String, BufferedImage> arrow;
 
     public static void init() {
         playerAssets = loadSprites(60, 59, 5, "/textures/ships.png");
@@ -93,6 +110,20 @@ public class Assets {
         fonts = new HashMap<>();
         fonts.put(getFontString(Fonts.SLKSCR_100), ContentLoader.loadFont("/fonts/slkscr.ttf", 100));
         fonts.put(getFontString(Fonts.SLKSCR_10), ContentLoader.loadFont("/fonts/slkscr.ttf", 10));
+
+       /* background = new HashMap<>();
+        background.put(getBgsString(BackGrounds.bg1),loadSprites(60, 60, 1, "/backgrounds/background_1.gif"));
+        background.put(getBgsString(BackGrounds.bg2),loadSprites(60, 60, 1, "/backgrounds/background_2.png"));
+        background.put(getBgsString(BackGrounds.bg3),loadSprites(60, 60, 1, Filenames.BACKGROUND_IMAGES[3]));
+        background.put(getBgsString(BackGrounds.bg4),loadSprites(60, 60, 1, Filenames.BACKGROUND_IMAGES[4]));
+        background.put(getBgsString(BackGrounds.bg5),loadSprites(60, 60, 1, Filenames.BACKGROUND_IMAGES[5]));
+        background.put(getBgsString(BackGrounds.bg6),loadSprites(60, 60, 1, Filenames.BACKGROUND_IMAGES[6]));
+        background.put(getBgsString(BackGrounds.bg7),loadSprites(60, 60, 1, Filenames.BACKGROUND_IMAGES[7]));
+        background.put(getBgsString(BackGrounds.bg8),loadSprites(60, 60, 1, Filenames.BACKGROUND_IMAGES[8]));
+        background.put(getBgsString(BackGrounds.bg9),loadSprites(60, 60, 1, Filenames.BACKGROUND_IMAGES[9]));
+        background.put(getBgsString(BackGrounds.bg10),loadSprites(60, 60, 1, "/backgrounds/background_11.jpg"));
+        background.put(getBgsString(BackGrounds.bg11),loadSprites(60, 60, 1, "/backgrounds/background_12.jpg"));*/
+
     }
 
     public static ArrayList<BufferedImage> getPlayerAssets() {
@@ -160,6 +191,27 @@ public class Assets {
         }
 
         return assets;
+    }
+    private static String getBgsString(BackGrounds background) {
+        String bgstring = "";
+
+        switch (background) {
+            case bg0 -> bgstring =  "gif";
+            case bg1 -> bgstring = "dark";
+            case bg2 -> bgstring = "yellow";
+            case bg3 -> bgstring = "something";
+            case bg4 -> bgstring = "orange";
+            case bg5 -> bgstring = "marine";
+            case bg6 -> bgstring = "green";
+            case bg7 -> bgstring = "purple";
+            case bg8 -> bgstring = "pink";
+            case bg9 -> bgstring = "blue";
+            case bg10 -> bgstring = "bluishpurple";
+            case bg11 -> bgstring = "skyblue";
+
+        }
+
+        return bgstring;
     }
 
     private static String getColorString(ExplosionColor color) {

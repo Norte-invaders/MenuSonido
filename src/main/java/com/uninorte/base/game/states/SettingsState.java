@@ -53,9 +53,16 @@ public class SettingsState extends State {
 
         UIButton uiMuteBtnSound = new UIButton(this,x + 300, y / 2 , UIButton.btnUnMuteImage,  () -> handler.getGame().setMuted(0) );
         UIButton uiMuteBtnEff =  new UIButton(this, x + 300, y / 2 + 140 , UIButton.btnUnMuteImage,  () -> handler.getGame().setMuted(1) );
-        UIButton btnBg = new UIButton(this,x+300,y / 2 + 200, UIButton.btnUnMuteImage, () -> handler.getGame().setBackground());
+        UIButton btnBg = new UIButton(this,x+300,y / 2 + 200, (ContentLoader.loadImage(Filenames.BACKGROUND_IMAGES[a])).getSubimage(0,0,40,40), () -> {handler.getGame().setBackground();
+        a += 1;
+        uiManager.getFocusedElement().update();
+        });
+        index = 0;
 
-        uiManager.addObjects(uiSliderbg,uiSlideref,uimenu,uiMuteBtnSound, uiMuteBtnEff, btnBg);
+        UIButton uiShipSelectionBtn = new UIButton(this, x + 125, y + 70, Assets.getArrow(ARROW_BUTTON_R), () -> index++);
+        UIButton uiShipSelectionIzqBtn = new UIButton(this, x + 5 , y + 70, Assets.getArrow(ARROW_BUTTON_L) , ()-> index--);
+
+        uiManager.addObjects(uiSliderbg,uiSlideref,uimenu,uiMuteBtnSound, uiMuteBtnEff, btnBg, uiShipSelectionBtn,uiShipSelectionIzqBtn);
     }
 
     @Override
@@ -88,11 +95,12 @@ public class SettingsState extends State {
 
         playerAssetsOptions = Assets.getPlayerAssets();
 
-        if( index < 0 ){
+        if( index < 0 )
             index = 2;
-        }if( index > 2 ){
+
+        if( index > 2 )
             index = 0;
-        }
+
         playerAssets = playerAssetsOptions.get(index);
         g.drawImage(playerAssets,x + 50, y + 50, null);
 

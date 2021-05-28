@@ -5,6 +5,7 @@ public class Filenames {
             "/backgrounds/background_1.gif",
             "/backgrounds/background_2.png",
             "/backgrounds/background_3.png",
+            "/backgrounds/background_4.png",
             "/backgrounds/background_5.jpg",
             "/backgrounds/background_6.jpg",
             "/backgrounds/background_7.jpg",
