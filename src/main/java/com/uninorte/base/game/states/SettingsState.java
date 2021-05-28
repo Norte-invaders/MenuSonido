@@ -11,19 +11,16 @@ import com.uninorte.base.game.ui.UISlider;
 import com.uninorte.base.sound.Sound;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.io.File;
 
 import static com.uninorte.base.game.gfx.Assets.UI_ELEMENTS.ARROW_BUTTON_L;
 import static com.uninorte.base.game.gfx.Assets.UI_ELEMENTS.ARROW_BUTTON_R;
 
 public class SettingsState extends State {
 
-    private int index;
-    protected ArrayList<BufferedImage> playerAssetsOptions;
-    protected BufferedImage playerAssets;
+    public int index, indexBg;
     protected int x,y;
-    int a =1;
+
 
     public SettingsState(Handler handler) {
         super(handler);
@@ -53,10 +50,8 @@ public class SettingsState extends State {
 
         UIButton uiMuteBtnSound = new UIButton(this,x + 300, y / 2 , UIButton.btnUnMuteImage,  () -> handler.getGame().setMuted(0) );
         UIButton uiMuteBtnEff =  new UIButton(this, x + 300, y / 2 + 140 , UIButton.btnUnMuteImage,  () -> handler.getGame().setMuted(1) );
-        UIButton btnBg = new UIButton(this,x+300,y / 2 + 200, (ContentLoader.loadImage(Filenames.BACKGROUND_IMAGES[a])).getSubimage(0,0,40,40), () -> {handler.getGame().setBackground();
-        a += 1;
-        uiManager.getFocusedElement().update();
-        });
+
+
         index = 0;
 
         UIButton uiShipSelectionBtn = new UIButton(this, x + 125, y + 70, Assets.getArrow(ARROW_BUTTON_R), () -> index++);
@@ -86,23 +81,30 @@ public class SettingsState extends State {
                 Color.WHITE,
                 Assets.getFont(Assets.FontsName.DEBUG, 35));
         Text.drawString(g, "Effects",
-                handler.boardDimensions().width / 2 + 15 ,
+                handler.boardDimensions().width / 2 + 15,
                 handler.boardDimensions().width / 4 + 90,
                 true,
                 Color.WHITE,
                 Assets.getFont(Assets.FontsName.DEBUG, 35));
         uiManager.render(g);
 
-        playerAssetsOptions = Assets.getPlayerAssets();
+        if (index < 0)
+            index = 5;
 
-        if( index < 0 )
-            index = 2;
-
-        if( index > 2 )
+        if (index > 5)
             index = 0;
 
-        playerAssets = playerAssetsOptions.get(index);
-        g.drawImage(playerAssets,x + 50, y + 50, null);
+        handler.getGame().playerAssetSelection(index);
+        g.drawImage(handler.getGame().getPlayerAssets(), x - 70, y + 50, null);
+
+        if (indexBg < 0)
+            indexBg = 11;
+        if (indexBg > 11)
+            indexBg = 0;
+
+        handler.getGame().setBgSelection(indexBg);
+        g.drawImage(handler.getGame().getBgAssets, x + 220, y + 55, null);
+
 
     }
 

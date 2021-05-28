@@ -70,6 +70,7 @@ public class Assets {
     private static ArrayList<BufferedImage> playerAssets;
     private static ArrayList<BufferedImage> aliensAssets;
     private static ArrayList<BufferedImage> bulletAssets;
+    private static ArrayList<BufferedImage> backgroundAssets;
 
     private static HashMap<String, ArrayList<BufferedImage>> explosions;
     private static HashMap<String, ArrayList<BufferedImage>> uiComponents;
@@ -78,9 +79,10 @@ public class Assets {
     private static HashMap<String, BufferedImage> arrow;
 
     public static void init() {
-        playerAssets = loadSprites(60, 59, 5, "/textures/ships.png");
+        playerAssets = loadSprites(60, 59, 6, "/textures/ships_sprite.png");
         aliensAssets = loadSprites(40, 40, 24, "/textures/aliens.png");
         bulletAssets = loadSprites(120, 120, 2, "/textures/bullets.png");
+        backgroundAssets = loadSprites(60,50,12, "/textures/bgicons.png");
 
         arrow = new HashMap<>();
         arrow.put(getUiString(UI_ELEMENTS.ARROW_BUTTON_L),ContentLoader.loadImage("/ui/arrow_1.png"));
@@ -129,6 +131,8 @@ public class Assets {
     public static ArrayList<BufferedImage> getPlayerAssets() {
         return playerAssets;
     }
+
+    public static ArrayList<BufferedImage> getBgAssets() { return backgroundAssets; }
 
     public static BufferedImage getArrow(UI_ELEMENTS uiElement){
         return arrow.get(getUiString(uiElement));

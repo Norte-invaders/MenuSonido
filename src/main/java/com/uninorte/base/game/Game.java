@@ -15,6 +15,8 @@ import com.uninorte.base.sound.Sound;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Game implements Runnable {
 
@@ -23,12 +25,16 @@ public class Game implements Runnable {
     private String title;
     private Dimension windowSize;
     private int choice = 0;
-    public int lastVolume = 0;
+    public int lastVolume = 50;
     private boolean running = false;
     private Thread gameThread;
 
     private BufferStrategy bs;
     private Graphics g;
+    protected ArrayList<BufferedImage> playerAssetsOptions;
+    public BufferedImage playerAssets;
+    protected ArrayList<BufferedImage> bgAssetsOptions;
+    public BufferedImage getBgAssets;
 
     private Display display;
 
@@ -116,6 +122,20 @@ public class Game implements Runnable {
         gameClient.setCurrentUser(user);
     }
 
+    public void playerAssetSelection(int index){
+        playerAssetsOptions = Assets.getPlayerAssets();
+        playerAssets = playerAssetsOptions.get(index);
+    }
+
+    public  BufferedImage getPlayerAssets(){return playerAssets;}
+
+    public void setBgSelection(int index){
+        bgAssetsOptions = Assets.getBgAssets();
+        getBgAssets = bgAssetsOptions.get(index);
+    }
+
+    public BufferedImage getBgAssets() { return getBgAssets; }
+
     private void addSound() {
         sound.add(Sound.BACKGROUND, Filenames.MUSIC[0]);
         sound.add(Sound.GAMEOVER, Filenames.MUSIC[1]);
@@ -168,8 +188,6 @@ public class Game implements Runnable {
                     break;
                 case 1:
                     sound.setVolume(Sound.GAMEOVER, volume);
-                    //sound.setVolume(Sound.SHOOTS, volume);
-                    //sound.setVolume(Sound.ALIEN, volume);
                     break;
                 case 2:
                     sound.setVolume(Sound.SHOOTS, volume);

@@ -90,7 +90,6 @@ public class Sound {
 
             clipSound = AudioSystem.getClip();
             clipSound.open(AudioSystem.getAudioInputStream(ContentLoader.loadAudio(path)));
-
             setVolume(currentVolume);
         }
 
@@ -103,14 +102,11 @@ public class Sound {
                 volume = 50;
             }
             gainControl.setValue((volume * 40f / 100f) - 35f);
-            System.out.println(35f);
         }
 
         float getVolume() {
             FloatControl gainControl = (FloatControl) clipSound.getControl(FloatControl.Type.MASTER_GAIN);
-            float a = (( (gainControl.getValue() + 35 ) * 100 ) / 40 );
-            System.out.println( "volume eff " + a);
-            return (( (gainControl.getValue() + 35 ) * 100 ) / 40 );
+            return (( (gainControl.getValue() + 35f ) * 100f ) / 40f );
         }
 
         void mute() {

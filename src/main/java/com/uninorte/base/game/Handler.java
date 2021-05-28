@@ -6,6 +6,7 @@ import com.uninorte.base.game.board.Board;
 import com.uninorte.base.game.highscore.HighScoreManager;
 import com.uninorte.base.game.input.KeyManager;
 import com.uninorte.base.game.input.MouseManager;
+import com.uninorte.base.game.states.SettingsState;
 import com.uninorte.base.settings.Settings;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ public class Handler {
     private Game game;
     private Board board;
     private Settings settings;
+    private SettingsState settingsState;
 
     private GameClient gameClient;
     private Error error;
@@ -38,6 +40,8 @@ public class Handler {
     public Settings getSettings() {
         return settings;
     }
+
+    public SettingsState getSettingsState(){ return settingsState; }
 
     public void setSettings(Settings settings) {
         this.settings = settings;

@@ -16,8 +16,9 @@ public class Player extends Creature {
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, new Dimension(60, 60));
 
-        creatureAssetsOptions = Assets.getPlayerAssets();
-        creatureAsset = creatureAssetsOptions.get(0);
+
+        creatureAsset = handler.getGame().getPlayerAssets();
+
 
         projectilesManager = new ProjectilesManager(600);
         explosionController = new Explosion(Assets.ExplosionColor.RED);
@@ -53,7 +54,7 @@ public class Player extends Creature {
 
         g.setColor(Color.white);
         g.drawString("SCORE: ", 30,30);
-        g.drawString(Integer.toString(handler.getHighScoreManager().getPlayerPoints(this)), 60, 30);
+        g.drawString(Integer.toString(handler.getHighScoreManager().getPlayerPoints(this)), 200, 30);
 
         showLives(g);
 
