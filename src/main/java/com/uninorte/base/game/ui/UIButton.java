@@ -28,7 +28,7 @@ public class UIButton extends UIObject {
 	public static BufferedImage btnMuteImage = buttonsMuteAssets.get(0);
 	public static BufferedImage btnUnMuteImage = buttonsMuteAssets.get(1);
 
-	public UIButton(State parent, float x, float y, int width, int height, ArrayList<BufferedImage> images, ClickListener clicker) {
+	public UIButton(State parent, float x, float y, int width, int height, ArrayList<BufferedImage> images, ActionListener clicker) {
 		super(parent, x, y, width, height);
 		this.images = images;
 		this.clicker = clicker;
