@@ -53,7 +53,6 @@ public class Board {
     public void setupLevel() {
         int level = ((SingleplayerState) handler.getGame().singlePlayerState).getCurrentLevel();
 
-        System.out.println(400 - 50L * level);
         mainPlayer.getProjectilesManager().changeTimeBetweenShots(400 - 20L * level);
         aliensManager.getProjectilesManager().changeTimeBetweenShots(400 - 50L * level);
     }
@@ -77,7 +76,7 @@ public class Board {
         return aliensManager;
     }
 
-    public HighScoreManager getHighScoreManager() { return highScoreManager; }
+    public HighScoreManager getHighScoreManager() { return highScoreManager;}
 
     public Player getMainPlayer() { return mainPlayer; }
 }

@@ -1,43 +1,43 @@
 package com.uninorte.base.game.states;
 
+import com.uninorte.base.Filenames;
 import com.uninorte.base.game.Handler;
+import com.uninorte.base.game.entities.Entity;
+import com.uninorte.base.game.gfx.ContentLoader;
 import com.uninorte.base.game.ui.StaticElements;
 import com.uninorte.base.game.ui.UIButton;
 import com.uninorte.base.game.gfx.Assets;
 import com.uninorte.base.game.gfx.Text;
-import com.uninorte.base.game.ui.StaticElements;
-import com.uninorte.base.game.ui.UIButton;
-import com.uninorte.base.game.gfx.Assets;
-import com.uninorte.base.game.gfx.Text;
-import com.uninorte.base.game.ui.StaticElements;
-import com.uninorte.base.game.ui.UIButton;
 import com.uninorte.base.game.ui.UISlider;
 import com.uninorte.base.sound.Sound;
 
 import java.awt.*;
 
 public class SettingsState extends State {
-
-
+    private int index;
+    protected ArrayList<BufferedImage> playerAssetsOptions;
+    protected BufferedImage playerAssets;
+    protected int x,y;
+    int a =1;
 
     public SettingsState(Handler handler) {
         super(handler);
     }
 
     protected void initComponents() {
-        int x = (int) (handler.boardDimensions().width * 0.5f - 128 / 2);
-        int y = (int) (handler.boardDimensions().height / 2 + 101);
+        x = (int) (handler.boardDimensions().width * 0.5f - 128 / 2);
+        y = (int) (handler.boardDimensions().height / 2 + 101);
 
-        UISlider uiSliderbg = new UISlider(this,  x - 150, y / 2 + 10, 30, 40, (value) -> handler.getGame().setVolume(0, value));
+        UISlider uiSliderbg = new UISlider(this,  x - 160, y / 2 + 10, 30, 40, (value) -> handler.getGame().setVolume(0, value));
         try{
             uiSliderbg.setValue(handler.getGame().sound.getVolume(Sound.BACKGROUND));
         }catch (Exception e) {
             e.printStackTrace();
         }
 
-        UISlider uiSlideref = new UISlider(this, x - 150, y / 2 + 150, 30, 40, (value) -> handler.getGame().setVolume(1, value));
-        UISlider uiSlidereff = new UISlider(this, x - 150, y / 2 + 150, 30, 40, (value) -> handler.getGame().setVolume(2, value));
-        UISlider uiSliderefff = new UISlider(this, x - 150, y / 2 + 150, 30, 40, (value) -> handler.getGame().setVolume(3, value));
+        UISlider uiSlideref = new UISlider(this, x - 160, y / 2 + 150, 30, 40, (value) -> handler.getGame().setVolume(1, value));
+        UISlider uiSlidereff = new UISlider(this, x - 160, y / 2 + 150, 30, 40, (value) -> handler.getGame().setVolume(2, value));
+        UISlider uiSliderefff = new UISlider(this, x - 160, y / 2 + 150, 30, 40, (value) -> handler.getGame().setVolume(3, value));
         try {
             uiSlideref.setValue(handler.getGame().sound.getVolume(Sound.GAMEOVER));
         } catch (Exception e) {
@@ -62,24 +62,35 @@ public class SettingsState extends State {
     @Override
     public void render(Graphics g) {
         Text.drawString(g, "SETTINGS",
-                handler.boardDimensions().width / 2 + 30,
+                handler.boardDimensions().width / 2 + 15,
                 handler.boardDimensions().height / 9,
                 true,
                 Color.WHITE,
                 Assets.getFont(Assets.FontsName.DEBUG, 100));
         Text.drawString(g, "Background",
-                handler.boardDimensions().width / 2 + 30,
+                handler.boardDimensions().width / 2 + 15,
                 handler.boardDimensions().height / 4 + 35,
                 true,
                 Color.WHITE,
                 Assets.getFont(Assets.FontsName.DEBUG, 35));
         Text.drawString(g, "Effects",
-                handler.boardDimensions().width / 2 + 30 ,
+                handler.boardDimensions().width / 2 + 15 ,
                 handler.boardDimensions().width / 4 + 90,
                 true,
                 Color.WHITE,
                 Assets.getFont(Assets.FontsName.DEBUG, 35));
         uiManager.render(g);
+
+        playerAssetsOptions = Assets.getPlayerAssets();
+
+        if( index < 0 ){
+            index = 4;
+        }if( index > 4 ){
+            index = 0;
+        }
+        playerAssets = playerAssetsOptions.get(index);
+        g.drawImage(playerAssets,x + 50, y + 50, null);
+
     }
 
 }

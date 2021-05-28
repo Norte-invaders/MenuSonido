@@ -38,7 +38,7 @@ public class WinScreenState extends State {
                 handler.boardDimensions().height / 2,
                 true,
                 Color.white,
-                Assets.getFont(Assets.FontsName.DEBUG, 100));
+                Assets.getFont(Assets.FontsName.DEBUG, 150));
 
         uiManager.render(g);
     }

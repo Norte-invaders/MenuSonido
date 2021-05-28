@@ -52,7 +52,8 @@ public class Player extends Creature {
         }
 
         g.setColor(Color.white);
-        g.drawString(Integer.toString(handler.getHighScoreManager().getPlayerPoints(this)), 30, 30);
+        g.drawString("SCORE: ", 30,30);
+        g.drawString(Integer.toString(handler.getHighScoreManager().getPlayerPoints(this)), 60, 30);
 
         showLives(g);
 

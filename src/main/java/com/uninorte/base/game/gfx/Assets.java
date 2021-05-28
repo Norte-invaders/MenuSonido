@@ -48,21 +48,26 @@ public class Assets {
         SLIDER,
         BUTTONS_NON_SQUARE,
         BUTTONSMUTE,
+        ARROW_BUTTON_L,
+        ARROW_BUTTON_R,
     }
 
     private static ArrayList<BufferedImage> playerAssets;
     private static ArrayList<BufferedImage> aliensAssets;
     private static ArrayList<BufferedImage> bulletAssets;
+
     private static HashMap<String, ArrayList<BufferedImage>> explosions;
-
     private static HashMap<String, ArrayList<BufferedImage>> uiComponents;
-
     private static HashMap<String, Font> fonts;
 
     public static void init() {
-        playerAssets = loadSprites(60, 60, 3, "/textures/ships.png");
+        playerAssets = loadSprites(60, 59, 5, "/textures/ships.png");
         aliensAssets = loadSprites(40, 40, 24, "/textures/aliens.png");
         bulletAssets = loadSprites(120, 120, 2, "/textures/bullets.png");
+
+        arrow = new HashMap<>();
+        arrow.put(getUiString(UI_ELEMENTS.ARROW_BUTTON_L),ContentLoader.loadImage("/ui/arrow_1.png"));
+        arrow.put(getUiString(UI_ELEMENTS.ARROW_BUTTON_R), ContentLoader.loadImage("/ui/arrow.png"));
 
         explosions = new HashMap<>();
         explosions.put(getColorString(ExplosionColor.GREEN), loadSprites(100, 100, 56, "/textures/explosions/green.png"));
@@ -92,6 +97,10 @@ public class Assets {
 
     public static ArrayList<BufferedImage> getPlayerAssets() {
         return playerAssets;
+    }
+
+    public static BufferedImage getArrow(UI_ELEMENTS uiElement){
+        return arrow.get(getUiString(uiElement));
     }
 
     public static ArrayList<BufferedImage> getAliensAssets(AlienName name, AlienColor color) {
@@ -200,6 +209,8 @@ public class Assets {
             case BUTTONS -> uiElementStr =  "buttons";
             case SLIDER -> uiElementStr = "slider";
             case BUTTONS_NON_SQUARE -> uiElementStr = "buttonsNonSquare";
+            case ARROW_BUTTON_L -> uiElementStr = "arrow_l";
+            case ARROW_BUTTON_R -> uiElementStr = "arrow_r";
         }
 
         return uiElementStr;
