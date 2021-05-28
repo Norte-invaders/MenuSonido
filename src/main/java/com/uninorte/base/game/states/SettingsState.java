@@ -53,11 +53,15 @@ public class SettingsState extends State {
 
 
         index = 0;
+        indexBg = 1;
+        UIButton uiShipSelectionBtn = new UIButton(this, x + 20, y + 70, Assets.getArrow(ARROW_BUTTON_R), () -> index++);
+        UIButton uiShipSelectionIzqBtn = new UIButton(this, x - 130, y + 70, Assets.getArrow(ARROW_BUTTON_L) , ()-> index--);
+        UIButton uiBgSelectionBtn = new UIButton(this, x + 315, y + 70, Assets.getArrow(ARROW_BUTTON_R), () -> { indexBg++;
+            handler.getGame().setBackground();
+        });
+        UIButton uiBgSelectionIzqBtn = new UIButton(this, x + 155 , y + 70, Assets.getArrow(ARROW_BUTTON_L) , ()-> {indexBg--; handler.getGame().setBackground();});
 
-        UIButton uiShipSelectionBtn = new UIButton(this, x + 125, y + 70, Assets.getArrow(ARROW_BUTTON_R), () -> index++);
-        UIButton uiShipSelectionIzqBtn = new UIButton(this, x + 5 , y + 70, Assets.getArrow(ARROW_BUTTON_L) , ()-> index--);
-
-        uiManager.addObjects(uiSliderbg,uiSlideref,uimenu,uiMuteBtnSound, uiMuteBtnEff, btnBg, uiShipSelectionBtn,uiShipSelectionIzqBtn);
+        uiManager.addObjects(uiSliderbg,uiSlideref,uimenu,uiMuteBtnSound, uiMuteBtnEff,uiShipSelectionBtn,uiShipSelectionIzqBtn,uiBgSelectionIzqBtn, uiBgSelectionBtn);
     }
 
     @Override
@@ -83,6 +87,18 @@ public class SettingsState extends State {
         Text.drawString(g, "Effects",
                 handler.boardDimensions().width / 2 + 15,
                 handler.boardDimensions().width / 4 + 90,
+                true,
+                Color.WHITE,
+                Assets.getFont(Assets.FontsName.DEBUG, 35));
+        Text.drawString(g, "Ships",
+                handler.boardDimensions().width / 2 - 100,
+                handler.boardDimensions().width / 2 - 50,
+                true,
+                Color.WHITE,
+                Assets.getFont(Assets.FontsName.DEBUG, 35));
+        Text.drawString(g, "Backgrounds",
+                handler.boardDimensions().width / 2 + 195,
+                handler.boardDimensions().width / 2 - 50,
                 true,
                 Color.WHITE,
                 Assets.getFont(Assets.FontsName.DEBUG, 35));
