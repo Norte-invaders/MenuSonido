@@ -1,6 +1,7 @@
 package com.uninorte.base.api;
 
 import com.uninorte.base.api.models.Error;
+import com.uninorte.base.api.models.RemotePlayer;
 import com.uninorte.base.api.models.Room;
 import com.uninorte.base.api.models.User;
 
@@ -22,7 +23,9 @@ public class GameClient {
     private List<Room> allRooms;
     private Error lastError;
 
-    private RequestHandler requestHandler;
+    private SocketClient socketClient;
+
+    private final RequestHandler requestHandler;
 
     public GameClient(String basePath) {
         requestHandler = new RequestHandler(basePath);
@@ -31,35 +34,86 @@ public class GameClient {
         currentUser = null;
         allRooms = null;
         lastError = null;
+    }
 
-        new SocketClient("http://localhost:8080");
+    public void connectToSocket() {
+        socketClient = new SocketClient("https://immense-everglades-29171.herokuapp.com", currentUser.getId());
+        socketClient.connect();
+    }
+
+    public void registerController(SocketActionsListener listener) {
+        socketClient.subscribe(listener);
+    }
+
+    public void joinToRoomWithSocket() {
+        lastError = null;
+        validateUserIsLogged();
+        if (lastError != null)
+            return;
+
+        socketClient.joinRoom(currentUser, currentRoom);
+    }
+
+    public void initializeUsers(RemotePlayer player1, RemotePlayer player2) {
+        socketClient.initializeMatch(player1.toJson(), player2.toJson());
+    }
+
+    public void updateUser(RemotePlayer player) {
+        socketClient.updateUser(player.toJson());
     }
 
     public void createUser(String nickname) {
+        lastError = null;
         User tmpUser = new User(nickname);
 
         RequestHandler.RequestResponse response = doPost(USER_CREATE, tmpUser.toJson());
-        if (response.statusCode < 400)
+        if (response.statusCode < 400) {
             currentUser = User.createFromJson(response.bodyResponse);
+            connectToSocket();
+        }
     }
 
     public void createRoom() {
-        if (currentUser == null) {
-            lastError = ERR_USER_NOT_LOGGED_IN;
+        lastError = null;
+        validateUserIsLogged();
+        if (lastError != null)
             return;
-        }
 
         RequestHandler.RequestResponse response = doPost(ROOMS_CREATE, currentUser.toJson());
-        if (response.statusCode < 400)
+        if (response.statusCode < 400) {
             currentRoom = Room.createFromJson(response.bodyResponse);
+        }
+    }
+
+    public void joinToRoom(String joinCode) {
+        lastError = null;
+        validateUserIsLogged();
+        if (lastError != null)
+            return;
+
+        String url = String.format(ROOMS_JOIN, joinCode);
+        RequestHandler.RequestResponse response = doPost(url, currentUser.toJson());
+        if (response.statusCode < 400) {
+            currentRoom = Room.createFromJson(response.bodyResponse);
+        }
+    }
+
+    public List<User> getUsersFromARoom(String joinCode) {
+        String url = String.format(ROOMS_GET_USERS, joinCode);
+        RequestHandler.RequestResponse response = doGet(url);
+
+        List<User> users = null;
+        if (response.statusCode < 400) {
+            users = User.createUsersFromJson(response.bodyResponse);
+        }
+
+        return users;
     }
 
     public List<Room> getRooms() {
-        if (currentUser == null) {
-            lastError = ERR_USER_NOT_LOGGED_IN;
+        validateUserIsLogged();
+        if (lastError != null)
             return null;
-        }
-
 
         RequestHandler.RequestResponse response = doGet(ROOMS_GET);
         if (response.statusCode < 400)
@@ -106,6 +160,12 @@ public class GameClient {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+        connectToSocket();
+    }
+
+    private void validateUserIsLogged() {
+        if (currentUser == null)
+            lastError = ERR_USER_NOT_LOGGED_IN;
     }
 
     public User getCurrentUser() {

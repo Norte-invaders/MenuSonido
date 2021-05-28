@@ -56,6 +56,7 @@ public class Assets {
         SPACE_MISSION,
         SPORT_TYPO,
         DEBUG,
+        JOYSTIX
     }
 
     public enum UI_ELEMENTS {
@@ -249,10 +250,11 @@ public class Assets {
         String fontStr = "";
 
         switch (name) {
-            case SLKSCR -> fontStr =  "/fonts/slkscr.ttf";
+            case SLKSCR -> fontStr = "/fonts/slkscr.ttf";
             case SPACE_MISSION -> fontStr = "/fonts/space-mission.otf";
             case SPORT_TYPO -> fontStr = "/fonts/sport-typo.ttf";
             case DEBUG -> fontStr = "/fonts/debug.otf";
+            case JOYSTIX -> fontStr = "/fonts/joystix_monospace.ttf";
         }
 
         return fontStr;

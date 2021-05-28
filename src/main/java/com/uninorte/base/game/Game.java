@@ -3,12 +3,12 @@ package com.uninorte.base.game;
 import com.uninorte.base.Filenames;
 import com.uninorte.base.api.GameClient;
 import com.uninorte.base.api.models.User;
-import com.uninorte.base.game.input.MouseManager;
-import com.uninorte.base.game.states.*;
 import com.uninorte.base.game.display.Display;
 import com.uninorte.base.game.gfx.Assets;
 import com.uninorte.base.game.gfx.ContentLoader;
 import com.uninorte.base.game.input.KeyManager;
+import com.uninorte.base.game.input.MouseManager;
+import com.uninorte.base.game.states.*;
 import com.uninorte.base.settings.Settings;
 import com.uninorte.base.sound.Sound;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class Game implements Runnable {
 
-    public static final String FILENAME_SETTINGS = "SpaceInvaders";
+    public static final String FILENAME_SETTINGS = System.getProperty("settings", "SpaceInvaders-Uninorte");
 
     private String title;
     private Dimension windowSize;
@@ -45,6 +45,7 @@ public class Game implements Runnable {
 
     public State mainState;
     public State gameSate;
+    public State gameStateMultiplayer;
     public State gameOverState;
     public State settingsState;
     public State winScreenState;
@@ -52,6 +53,7 @@ public class Game implements Runnable {
     public State multiplayerState;
     public State roomsState;
     public State signUpState;
+    public State waitingRoomState;
 
     private Image background;
 
@@ -91,8 +93,13 @@ public class Game implements Runnable {
 
         handler = new Handler(this);
         handler.setSettings(settings);
+
+        setRequestHandlers();
+        loadUserIfExists();
+
         mainState = new MainState(handler);
         gameSate = new GameState(handler);
+        gameStateMultiplayer = new GameStateMultiplayer(handler);
         gameOverState = new GameOverState(handler);
         settingsState = new SettingsState(handler);
         winScreenState = new WinScreenState(handler);
@@ -100,15 +107,13 @@ public class Game implements Runnable {
         multiplayerState = new MultiplayerState(handler);
         signUpState = new SignUpState(handler);
         roomsState = new RoomsState(handler);
-
-        setRequestHandlers();
-        loadUserIfExists();
+        waitingRoomState = new WaitingRoomState(handler);
 
         State.setCurrentState(mainState);
     }
 
     private void setRequestHandlers() {
-        gameClient = new GameClient("http://localhost:8080");
+        gameClient = new GameClient("https://immense-everglades-29171.herokuapp.com");
         handler.setGameClient(gameClient);
     }
 
@@ -241,7 +246,7 @@ public class Game implements Runnable {
 
         g = bs.getDrawGraphics();
         g.clearRect(0, 0, windowSize.width, windowSize.height);
-        g.drawImage(background, 0, 0,  windowSize.width, windowSize.height, null);
+        g.drawImage(background, 0, 0, windowSize.width, windowSize.height, null);
 
         if (State.getCurrentState() != null)
             State.getCurrentState().render(g);
@@ -261,20 +266,20 @@ public class Game implements Runnable {
         long timer = 0;
         int ticks = 0;
 
-        while(running){
+        while (running) {
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
             lastTime = now;
 
-            if(delta >= 1){
+            if (delta >= 1) {
                 update();
                 render();
                 ticks++;
                 delta--;
             }
 
-            if(timer >= 1000000000){
+            if (timer >= 1000000000) {
                 ticks = 0;
                 timer = 0;
             }
@@ -292,9 +297,9 @@ public class Game implements Runnable {
         gameThread.start();
     }
 
-    public synchronized void stop(){
+    public synchronized void stop() {
         // Exit if the game is not running
-        if(!running)
+        if (!running)
             return;
 
         running = false;

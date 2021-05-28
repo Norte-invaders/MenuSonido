@@ -5,6 +5,7 @@ import com.uninorte.base.api.models.Error;
 import com.uninorte.base.game.Handler;
 import com.uninorte.base.game.gfx.Assets;
 import com.uninorte.base.game.gfx.Text;
+import com.uninorte.base.game.states.multiplayer.MultiplayerController;
 import com.uninorte.base.game.ui.UIButton;
 import com.uninorte.base.game.ui.UIInput;
 import com.uninorte.base.settings.Settings;
@@ -41,6 +42,11 @@ public class SignUpState extends State {
                 handler.setError(new Error(e.getMessage()));
             }
 
+            if (handler.getGameClient().getCurrentUser() != null) {
+                handler.setMultiplayerController(new MultiplayerController(handler));
+                handler.getGameClient().registerController(handler.getMultiplayerController());
+            }
+
             setCurrentState(handler.getGame().multiplayerState);
         });
 
@@ -75,15 +81,6 @@ public class SignUpState extends State {
                     Color.red,
                     Assets.getFont(Assets.FontsName.SLKSCR, 20));
         }
-
-//        if (additionalError != null) {
-//            Text.drawString(g, additionalError,
-//                    handler.boardDimensions().width / 2,
-//                    (int) (handler.boardDimensions().height * 0.30f),
-//                    true,
-//                    Color.red,
-//                    Assets.getFont(Assets.FontsName.SLKSCR, 20));
-//        }
 
         uiManager.render(g);
     }
