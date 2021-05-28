@@ -2,7 +2,6 @@ package com.uninorte.base.game.states;
 
 import com.uninorte.base.Filenames;
 import com.uninorte.base.game.Handler;
-import com.uninorte.base.game.entities.Entity;
 import com.uninorte.base.game.gfx.ContentLoader;
 import com.uninorte.base.game.ui.StaticElements;
 import com.uninorte.base.game.ui.UIButton;
