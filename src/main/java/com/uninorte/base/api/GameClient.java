@@ -37,7 +37,7 @@ public class GameClient {
     }
 
     public void connectToSocket() {
-        socketClient = new SocketClient("http://localhost:8080", currentUser.getId());
+        socketClient = new SocketClient("https://immense-everglades-29171.herokuapp.com", currentUser.getId());
         socketClient.connect();
     }
 

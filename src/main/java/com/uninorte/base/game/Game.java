@@ -97,7 +97,7 @@ public class Game implements Runnable {
     }
 
     private void setRequestHandlers() {
-        gameClient = new GameClient("http://localhost:8080");
+        gameClient = new GameClient("https://immense-everglades-29171.herokuapp.com");
         handler.setGameClient(gameClient);
     }
 
